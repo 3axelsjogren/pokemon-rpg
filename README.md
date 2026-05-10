@@ -56,3 +56,4 @@ assets/
 - [ ] Encounter-system (slumpmässiga strider i högt gräs)
 - [ ] Enkelt inventarie / UI
 - [ ] Fler kartor + dörröppningar mellan dem
+# pokemon-rpg
