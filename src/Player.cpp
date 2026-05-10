@@ -74,6 +74,9 @@ void Player::DrawSprite() const {
     // Head
     DrawRectangle(x + 8, y + 2, s - 16, 14, { 255, 213, 170, 255 });
 
+    // Hair
+    DrawRectangle(x + 8, y + 2, s - 16, 5, { 30, 30, 30, 255 });
+
     // Eyes (direction-dependent)
     Color eyeCol = BLACK;
     switch (m_facing) {

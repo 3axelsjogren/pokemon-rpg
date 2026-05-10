@@ -1,4 +1,11 @@
 #pragma once
+#include <raylib.h>
+
+struct SpriteConfig {
+    Color bodyColor = BLUE;
+    Color hairColor = { 80, 40, 10, 255 };
+    Color skinColor = { 255, 213, 170, 255 };
+};
 
 // Window
 constexpr int SCREEN_WIDTH = 800;

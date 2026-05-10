@@ -3,6 +3,8 @@
 #include "raylib.h"
 #include "MapManager.h"
 #include "Player.h"
+#include "NPC.h"
+#include "DialogBox.h"
 #include <memory>
 
 class Game {
@@ -19,4 +21,5 @@ private:
     std::unique_ptr<MapManager> m_mapManager;
     std::unique_ptr<Player> m_player;
     Camera2D m_camera;
+    DialogBox m_dialog;
 };

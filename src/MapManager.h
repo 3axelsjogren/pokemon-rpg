@@ -10,6 +10,7 @@
 #include <string>
 #include <unordered_map>
 #include "TileMap.h"
+#include "NPC.h"
 
 struct DoorLink {
     int tileX, tileY; // dörrtilens position
@@ -27,9 +28,12 @@ public:
     void SwitchMap(const std::string& mapName, float spawnX, float spawnY);
     bool CheckDoorTrigger(float playerX, float playerY, float& outSpawnX, float& outSpawnY, std::string& outTargetMap);
 
+    std::vector<NPC>& GetNPCs() { return m_npcs[m_currentMapName]; }
+
 private:
     std::unique_ptr<TileMap> m_currentMap;
     std::string m_currentMapName;
+    std::unordered_map<std::string, std::vector<NPC>> m_npcs;
 
     // Alla kartor
     std::unordered_map<std::string, std::vector<std::vector<int>>> m_mapData;

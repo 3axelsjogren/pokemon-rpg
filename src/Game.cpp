@@ -14,6 +14,8 @@ Game::Game() {
     m_camera.offset = { SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f };
     m_camera.target = m_player->GetCenter();
     m_camera.rotation = 0.0f;
+
+
 }
 
 Game::~Game() {
@@ -46,6 +48,21 @@ void Game::Update(float dt) {
     center = m_player->GetCenter();
     m_camera.target.x += (center.x - m_camera.target.x) * 8.0f * dt;
     m_camera.target.y += (center.y - m_camera.target.y) * 8.0f * dt;
+
+    // NPC-interaktion
+    if (IsKeyPressed(KEY_E)) {
+        if (m_dialog.IsOpen()) {
+            m_dialog.Close();
+        } else {
+            Vector2 pos = m_player->GetPosition();
+            for (auto& npc : m_mapManager->GetNPCs()) {
+                if (npc.IsNearPlayer(pos.x, pos.y)) {
+                    m_dialog.Show(npc.GetName(), npc.GetDialog());
+                    break;
+                }
+            }
+        }
+    }
 }
 
 void Game::Draw() {
@@ -53,8 +70,11 @@ void Game::Draw() {
     ClearBackground({ 20, 20, 20, 255 });
     BeginMode2D(m_camera);
     m_mapManager->GetCurrentMap()->Draw(m_camera);
+    for (auto& npc : m_mapManager->GetNPCs())
+        npc.Draw();
     m_player->Draw();
     EndMode2D();
+    m_dialog.Draw();
     DrawHUD();
     EndDrawing();
 }

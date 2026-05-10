@@ -37,7 +37,7 @@ static const std::vector<std::vector<int>> HOUSE_MAP = {
     { 4, 7, 7, 7, 7, 7, 7, 4 },
     { 4, 7, 7, 7, 7, 7, 7, 4 },
     { 4, 7, 7, 7, 7, 7, 7, 4 },
-    { 4, 4, 4, 6, 4, 4, 4, 4 },  // 6 = dörr ut
+    { 4, 4, 4, 6, 4, 4, 4, 4 },  // 6 = dörr ut, 4 = väggar, 7 = golv
 };
 
 MapManager::MapManager() {
@@ -54,6 +54,9 @@ void MapManager::RegisterMaps() {
 
     // Dörr i house: tile (3,6) leder tillbaka till outdoor
     m_doors["house"].push_back({ 3, 6, "outdoor", 10 * TILE_SIZE, 5 * TILE_SIZE });
+
+    m_npcs["house"].push_back(NPC(3 * TILE_SIZE, 3 * TILE_SIZE, "Mamma",
+    "Ah, du ar vaken! Ga ut och utforska varlden, mitt barn.", { RED, { 180, 100, 20, 255 }, { 255, 213, 170, 255 } }));
 }
 
 void MapManager::SwitchMap(const std::string& mapName, float spawnX, float spawnY) {
@@ -65,17 +68,15 @@ void MapManager::SwitchMap(const std::string& mapName, float spawnX, float spawn
     m_currentMapName = mapName;
 }
 
-bool MapManager::CheckDoorTrigger(float playerX, float playerY,
-                                   float& outSpawnX, float& outSpawnY,
-                                   std::string& outTargetMap) {
+bool MapManager::CheckDoorTrigger(float playerX, float playerY, float& outSpawnX, float& outSpawnY, std::string& outTargetMap) {
     int tileX = (int)(playerX / TILE_SIZE);
     int tileY = (int)(playerY / TILE_SIZE);
 
     for (auto& door : m_doors[m_currentMapName]) {
         if (door.tileX == tileX && door.tileY == tileY) {
-            outSpawnX     = door.spawnX;
-            outSpawnY     = door.spawnY;
-            outTargetMap  = door.targetMap;
+            outSpawnX = door.spawnX;
+            outSpawnY = door.spawnY;
+            outTargetMap = door.targetMap;
             return true;
         }
     }
