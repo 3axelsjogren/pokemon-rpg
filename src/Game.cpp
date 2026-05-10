@@ -43,7 +43,7 @@ Game::Game() {
 
     // Camera
     m_camera = {};
-    m_camera.zoom   = 1.5f;
+    m_camera.zoom = 1.5f;
     m_camera.offset = { SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f };
     m_camera.target = m_player->GetCenter();
     m_camera.rotation = 0.0f;

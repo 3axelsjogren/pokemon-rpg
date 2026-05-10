@@ -17,6 +17,6 @@ private:
     void DrawHUD();
 
     std::unique_ptr<TileMap> m_map;
-    std::unique_ptr<Player>  m_player;
-    Camera2D                 m_camera;
+    std::unique_ptr<Player> m_player;
+    Camera2D m_camera;
 };
