@@ -1,6 +1,7 @@
 #pragma once
+
 #include "raylib.h"
-#include "TileMap.h"
+#include "MapManager.h"
 #include "Player.h"
 #include <memory>
 
@@ -8,7 +9,6 @@ class Game {
 public:
     Game();
     ~Game();
-
     void Run();
 
 private:
@@ -16,7 +16,7 @@ private:
     void Draw();
     void DrawHUD();
 
-    std::unique_ptr<TileMap> m_map;
+    std::unique_ptr<MapManager> m_mapManager;
     std::unique_ptr<Player> m_player;
     Camera2D m_camera;
 };

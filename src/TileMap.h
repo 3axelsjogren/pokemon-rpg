@@ -6,10 +6,14 @@
 
 // Tile IDs
 enum TileType {
-    TILE_GRASS  = 0,
-    TILE_WATER  = 1,
-    TILE_TREE   = 2,
-    TILE_PATH   = 3,
+    TILE_GRASS = 0,
+    TILE_WATER = 1,
+    TILE_TREE = 2,
+    TILE_PATH = 3,
+    TILE_HOUSE = 4,
+    TILE_BRIDGE = 5,
+    TILE_DOOR = 6,
+    TILE_FLOOR = 7,
 };
 
 struct Tile {

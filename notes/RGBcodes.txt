@@ -1,0 +1,17 @@
+// RGB-referens:
+// Grönt:   (106,168,79)  mörkare: (39,78,19)
+// Blått:   (70,130,180)  mörkare: (30,80,120)
+// Brunt:   (180,100,60)  mörkare: (120,60,20)
+// Grått:   (180,180,180) mörkare: (100,100,100)
+// Rött:    (200,80,80)   mörkare: (140,40,40)
+// Gult:    (220,200,80)
+// Vitt:    (240,240,240)
+// Svart:   (20,20,20)
+//
+// Tumregler:
+// Alla tre lika         = grå nyans (lågt=mörkt, högt=ljust)
+// Högt R, lågt G och B = rött
+// Högt G, lågt R och B = grönt
+// Högt B, lågt R och G = blått
+// Högt R+G, lågt B     = gult
+// Högt R+B, lågt G     = lila

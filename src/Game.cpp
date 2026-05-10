@@ -1,47 +1,14 @@
 #include "Game.h"
 #include "Constants.h"
 
-// ── Test map layout ──────────────────────────────────────────
-// 0 = grass, 1 = water, 2 = tree, 3 = path
-static const std::vector<std::vector<int>> MAP_DATA = {
-    { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
-    { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
-    { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
-    { 2, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 2 },
-    { 2, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 2 },
-    { 2, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 2 },
-    { 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 2 },
-    { 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 2 },
-    { 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 2 },
-    { 2, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 2 },
-    { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
-    { 2, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
-    { 2, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
-    { 2, 0, 1, 1, 1, 1, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2 },
-    { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
-    { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
-    { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
-    { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2 },
-    { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2 },
-    { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
-};
-
 Game::Game() {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_TITLE);
     SetTargetFPS(TARGET_FPS);
 
-    // Map
-    int mapW = (int)MAP_DATA[0].size();
-    int mapH = (int)MAP_DATA.size();
-    m_map = std::make_unique<TileMap>(mapW, mapH);
-    m_map->LoadFromArray(MAP_DATA);
+    m_mapManager = std::make_unique<MapManager>();
 
-    // Player — start in middle of map
-    float startX = (mapW / 2) * TILE_SIZE;
-    float startY = (mapH / 2) * TILE_SIZE;
-    m_player = std::make_unique<Player>(startX, startY);
+    m_player = std::make_unique<Player>(10 * TILE_SIZE, 10 * TILE_SIZE);
 
-    // Camera
     m_camera = {};
     m_camera.zoom = 1.5f;
     m_camera.offset = { SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f };
@@ -62,31 +29,38 @@ void Game::Run() {
 }
 
 void Game::Update(float dt) {
-    m_player->Update(dt, *m_map);
+    TileMap* map = m_mapManager->GetCurrentMap();
+    m_player->Update(dt, *map);
 
-    // Smooth camera follow
+    // Kolla dörrtrigger
+    float spawnX, spawnY;
+    std::string targetMap;
     Vector2 center = m_player->GetCenter();
+    if (m_mapManager->CheckDoorTrigger(center.x, center.y, spawnX, spawnY, targetMap)) {
+        m_mapManager->SwitchMap(targetMap, spawnX, spawnY);
+        m_player->SetPosition(spawnX, spawnY);
+        m_camera.target = m_player->GetCenter();
+    }
+
+    // Smooth camera
+    center = m_player->GetCenter();
     m_camera.target.x += (center.x - m_camera.target.x) * 8.0f * dt;
     m_camera.target.y += (center.y - m_camera.target.y) * 8.0f * dt;
 }
 
 void Game::Draw() {
     BeginDrawing();
-        ClearBackground({ 20, 20, 20, 255 });
-
-        BeginMode2D(m_camera);
-            m_map->Draw(m_camera);
-            m_player->Draw();
-        EndMode2D();
-
-        DrawHUD();
+    ClearBackground({ 20, 20, 20, 255 });
+    BeginMode2D(m_camera);
+    m_mapManager->GetCurrentMap()->Draw(m_camera);
+    m_player->Draw();
+    EndMode2D();
+    DrawHUD();
     EndDrawing();
 }
 
 void Game::DrawHUD() {
-    // FPS counter
     DrawFPS(8, 8);
-
-    // Controls hint
+    DrawText(m_mapManager->GetCurrentMapName().c_str(), 8, SCREEN_HEIGHT - 44, 16, YELLOW);
     DrawText("WASD / Arrow keys to move", 8, SCREEN_HEIGHT - 24, 16, LIGHTGRAY);
 }

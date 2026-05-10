@@ -15,6 +15,8 @@ public:
     Vector2 GetPosition() const { return m_pos; }
     Vector2 GetCenter() const { return { m_pos.x + TILE_SIZE / 2.0f,m_pos.y + TILE_SIZE / 2.0f }; }
 
+    void SetPosition(float x, float y) { m_pos = { x, y }; }
+
 private:
     Vector2 m_pos;
     Direction m_facing;
