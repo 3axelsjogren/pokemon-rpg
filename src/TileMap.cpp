@@ -1,4 +1,4 @@
-#include "TileMap.hpp"
+#include "TileMap.h"
 
 TileMap::TileMap(int width, int height)
     : m_width(width), m_height(height)

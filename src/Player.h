@@ -1,7 +1,7 @@
 #pragma once
 #include "raylib.h"
-#include "TileMap.hpp"
-#include "Constants.hpp"
+#include "TileMap.h"
+#include "Constants.h"
 
 enum class Direction { DOWN = 0, LEFT, RIGHT, UP };
 

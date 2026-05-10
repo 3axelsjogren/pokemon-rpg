@@ -1,7 +1,7 @@
 #pragma once
 #include "raylib.h"
-#include "TileMap.hpp"
-#include "Player.hpp"
+#include "TileMap.h"
+#include "Player.h"
 #include <memory>
 
 class Game {

@@ -1,5 +1,5 @@
-#include "Game.hpp"
-#include "Constants.hpp"
+#include "Game.h"
+#include "Constants.h"
 
 // ── Test map layout ──────────────────────────────────────────
 // 0 = grass, 1 = water, 2 = tree, 3 = path

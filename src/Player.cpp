@@ -1,4 +1,4 @@
-#include "Player.hpp"
+#include "Player.h"
 #include <cmath>
 
 Player::Player(float startX, float startY)
