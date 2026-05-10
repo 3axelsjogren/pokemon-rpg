@@ -1,0 +1,39 @@
+#pragma once
+#include <vector>
+#include <string>
+#include "raylib.h"
+#include "Constants.hpp"
+
+// Tile IDs
+enum TileType {
+    TILE_GRASS  = 0,
+    TILE_WATER  = 1,
+    TILE_TREE   = 2,
+    TILE_PATH   = 3,
+};
+
+struct Tile {
+    TileType type;
+    bool solid;  // blocks movement
+};
+
+class TileMap {
+public:
+    TileMap(int width, int height);
+    ~TileMap();
+
+    void LoadFromArray(const std::vector<std::vector<int>>& data);
+    void Draw(Camera2D camera) const;
+
+    bool IsSolid(int tileX, int tileY) const;
+    bool IsSolidWorld(float worldX, float worldY) const;
+
+    int GetWidth()  const { return m_width; }
+    int GetHeight() const { return m_height; }
+
+private:
+    int m_width, m_height;
+    std::vector<std::vector<Tile>> m_tiles;
+
+    Color TileColor(TileType type) const;
+};
