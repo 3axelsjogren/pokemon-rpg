@@ -32,6 +32,7 @@ make -j$(nproc)
 |---------------|-----------------|
 | WASD / Pilar  | Rörelse          |
 | ESC           | Stäng fönster    |
+| E             | Interagera       |
 
 ## Projektstruktur
 
