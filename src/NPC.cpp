@@ -11,8 +11,8 @@ NPC::NPC(float x, float y, const std::string& name, const std::string& dialog, S
     : m_x(x), m_y(y), m_name(name), m_dialog(dialog), m_config(config) {}
 
 void NPC::Draw() const {
-    int x = (int)m_x;
-    int y = (int)m_y;
+    int x = static_cast<int>(m_x);
+    int y = static_cast<int>(m_y);
     int s = TILE_SIZE;
 
     DrawRectangle(x + 6, y + 14, s - 12, s - 10, m_config.bodyColor);
