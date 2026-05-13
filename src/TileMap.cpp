@@ -7,10 +7,10 @@ TileMap::TileMap(int width, int height) : m_width(width), m_height(height) {
 TileMap::~TileMap() {}
 
 void TileMap::LoadFromArray(const std::vector<std::vector<int>>& data) {
-    for (int y = 0; y < (int)data.size() && y < m_height; ++y) {
-        for (int x = 0; x < (int)data[y].size() && x < m_width; ++x) {
+    for (int y = 0; y < static_cast<int>(data.size()) && y < m_height; ++y) {
+        for (int x = 0; x < static_cast<int>(data[y].size()) && x < m_width; ++x) {
             TileType type = static_cast<TileType>(data[y][x]);
-            bool solid = (type == TILE_WATER || type == TILE_TREE || type == TILE_HOUSE);
+            bool solid = (type == TILE_WATER || type == TILE_TREE || type == TILE_HOUSE); // addera AND på nya solids
             m_tiles[y][x] = { type, solid };
         }
     }
@@ -18,10 +18,10 @@ void TileMap::LoadFromArray(const std::vector<std::vector<int>>& data) {
 
 void TileMap::Draw(Camera2D camera) const {
     // Only draw tiles visible on screen (culling)
-    int startX = (int)(camera.target.x - camera.offset.x) / TILE_SIZE - 1;
-    int startY = (int)(camera.target.y - camera.offset.y) / TILE_SIZE - 1;
-    int endX = startX + (int)(SCREEN_WIDTH / TILE_SIZE) + 3;
-    int endY = startY + (int)(SCREEN_HEIGHT / TILE_SIZE) + 3;
+    int startX = static_cast<int>(camera.target.x - camera.offset.x) / TILE_SIZE - 1;
+    int startY = static_cast<int>(camera.target.y - camera.offset.y) / TILE_SIZE - 1;
+    int endX = startX + SCREEN_WIDTH / TILE_SIZE + 3;
+    int endY = startY + SCREEN_HEIGHT / TILE_SIZE + 3;
 
     startX = (startX < 0) ? 0 : startX;
     startY = (startY < 0) ? 0 : startY;
@@ -47,8 +47,8 @@ bool TileMap::IsSolid(int tileX, int tileY) const {
 }
 
 bool TileMap::IsSolidWorld(float worldX, float worldY) const {
-    int tx = (int)(worldX / TILE_SIZE);
-    int ty = (int)(worldY / TILE_SIZE);
+    const int tx = static_cast<int>(worldX / TILE_SIZE);
+    const int ty = static_cast<int>(worldY / TILE_SIZE);
     return IsSolid(tx,ty);
 }
 
