@@ -14,6 +14,7 @@ enum TileType {
     TILE_BRIDGE = 5,
     TILE_DOOR = 6,
     TILE_FLOOR = 7,
+    TILE_LOCKED_DOOR = 8,
 };
 
 struct Tile {
