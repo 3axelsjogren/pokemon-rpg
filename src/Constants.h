@@ -7,6 +7,10 @@ struct SpriteConfig {
     Color skinColor = { 255, 213, 170, 255 };
 };
 
+struct GameState {
+    bool hasGem = false;
+};
+
 // Window
 constexpr int SCREEN_WIDTH = 800;
 constexpr int SCREEN_HEIGHT = 600;

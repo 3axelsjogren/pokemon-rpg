@@ -43,9 +43,22 @@ void Game::Update(float dt) {
     std::string targetMap;
     Vector2 center = m_player->GetCenter();
     if (m_mapManager->CheckDoorTrigger(center.x, center.y, spawnX, spawnY, targetMap)) {
+        if (targetMap == "blockage" && m_state.hasGem)
+            targetMap = "blockage_unlocked";
         m_mapManager->SwitchMap(targetMap, spawnX, spawnY);
         m_player->SetPosition(spawnX, spawnY);
         m_camera.target = m_player->GetCenter();
+    }
+
+    // Plocka upp kristall
+    if (!m_state.hasGem) {
+        int tileX = static_cast<int>(center.x / TILE_SIZE);
+        int tileY = static_cast<int>(center.y / TILE_SIZE);
+        if (m_mapManager->GetCurrentMapName() == "q1_cave" && tileX == 16 && tileY == 2) {
+            m_state.hasGem = true;
+            m_mapManager->SwitchMap("q1_cave_no_gem", center.x, center.y);
+            m_dialog.Show("!", "You found a golden crystal! The guards fear your courage...");
+        }
     }
 
     // Smooth camera
@@ -65,7 +78,7 @@ void Game::Update(float dt) {
             for (auto& npc : m_mapManager->GetNPCs()) {
                 float dx = pos.x - npc.GetX();
                 float dy = pos.y - npc.GetY();
-                float dist = sqrt(dx*dx + dy*dy);
+                float dist = sqrtf(dx*dx + dy*dy);
                 if (dist < TILE_SIZE * 2.0f && dist < closestDist) {
                     closestDist = dist;
                     closest = &npc;
