@@ -10,7 +10,7 @@ void TileMap::LoadFromArray(const std::vector<std::vector<int>>& data) {
     for (int y = 0; y < static_cast<int>(data.size()) && y < m_height; ++y) {
         for (int x = 0; x < static_cast<int>(data[y].size()) && x < m_width; ++x) {
             TileType type = static_cast<TileType>(data[y][x]);
-            bool solid = (type == TILE_WATER || type == TILE_TREE || type == TILE_HOUSE); // addera AND på nya solids
+            bool solid = (type == TILE_WATER || type == TILE_TREE || type == TILE_HOUSE || type == TILE_LOCKED_DOOR); // addera AND på nya solids
             m_tiles[y][x] = { type, solid };
         }
     }
@@ -62,6 +62,7 @@ Color TileMap::TileColor(TileType type) const {
         case TILE_BRIDGE: return { 160, 120, 80,  255 };
         case TILE_DOOR: return { 120, 60,  20,  255 };
         case TILE_FLOOR: return {220,200,100, 255};
+        case TILE_LOCKED_DOOR: return{ 120, 60,  20,  235};
         default: return MAGENTA;
     }
 }
