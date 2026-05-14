@@ -1,4 +1,8 @@
 #include "Game.h"
+
+#include <cfloat>
+#include <cmath>
+
 #include "Constants.h"
 
 Game::Game() {
@@ -55,12 +59,20 @@ void Game::Update(float dt) {
             m_dialog.Close();
         } else {
             Vector2 pos = m_player->GetPosition();
+            NPC* closest = nullptr;
+            float closestDist = FLT_MAX;
+
             for (auto& npc : m_mapManager->GetNPCs()) {
-                if (npc.IsNearPlayer(pos.x, pos.y)) {
-                    m_dialog.Show(npc.GetName(), npc.GetDialog());
-                    break;
+                float dx = pos.x - npc.GetX();
+                float dy = pos.y - npc.GetY();
+                float dist = sqrt(dx*dx + dy*dy);
+                if (dist < TILE_SIZE * 2.0f && dist < closestDist) {
+                    closestDist = dist;
+                    closest = &npc;
                 }
             }
+            if (closest)
+                m_dialog.Show(closest->GetName(), closest->GetDialog());
         }
     }
 }

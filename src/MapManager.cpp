@@ -90,7 +90,8 @@ static const std::vector<std::vector<int>> BLOCKAGE_MAP = {
 
 MapManager::MapManager() {
     RegisterMaps();
-    SwitchMap("outdoor", 10 * TILE_SIZE, 10 * TILE_SIZE);
+    // SwitchMap("outdoor", 10 * TILE_SIZE, 10 * TILE_SIZE); // start av spelet
+    SwitchMap("blockage", 3 * TILE_SIZE, 5 * TILE_SIZE); // quest1
 }
 
 void MapManager::RegisterMaps() {
@@ -115,6 +116,12 @@ void MapManager::RegisterMaps() {
     m_doors["woods_first"].push_back({ 2, 0, "blockage", 2 * TILE_SIZE, 18 * TILE_SIZE });
     // dörr tillbaka
     m_doors["blockage"].push_back({ 2, 19, "woods_first", 2 * TILE_SIZE, 1 * TILE_SIZE });
+
+    //vakter i blockage
+    m_npcs["blockage"].push_back(NPC(3 * TILE_SIZE, 8 * TILE_SIZE, "Vakt",
+    "You can't pass here, sir!", { { 100, 100, 120, 255 }, { 60, 60, 60, 255 }, { 255, 213, 170, 255 } }));
+    m_npcs["blockage"].push_back(NPC(4 * TILE_SIZE, 8 * TILE_SIZE, "Vakt",
+        "Find the crystal in the cave and bring it to us and we might let you in... ", { { 100, 100, 120, 255 }, { 60, 60, 60, 255 }, { 255, 213, 170, 255 } }));
 }
 
 void MapManager::SwitchMap(const std::string& mapName, float spawnX, float spawnY) {
