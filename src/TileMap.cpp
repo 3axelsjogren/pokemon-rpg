@@ -10,7 +10,8 @@ void TileMap::LoadFromArray(const std::vector<std::vector<int>>& data) {
     for (int y = 0; y < static_cast<int>(data.size()) && y < m_height; ++y) {
         for (int x = 0; x < static_cast<int>(data[y].size()) && x < m_width; ++x) {
             TileType type = static_cast<TileType>(data[y][x]);
-            bool solid = (type == TILE_WATER || type == TILE_TREE || type == TILE_HOUSE || type == TILE_LOCKED_DOOR || type == TILE_CAVE_WALL); // addera AND på nya solids
+            bool solid = (type == TILE_WATER || type == TILE_TREE || type == TILE_HOUSE
+                || type == TILE_LOCKED_DOOR || type == TILE_CAVE_WALL || type == TILE_VOID); // addera AND på nya solids
             m_tiles[y][x] = { type, solid };
         }
     }
@@ -63,9 +64,10 @@ Color TileMap::TileColor(TileType type) const {
         case TILE_DOOR: return { 120, 60,  20,  255 };
         case TILE_FLOOR: return {220,200,100, 255};
         case TILE_LOCKED_DOOR: return{ 120, 60,  20,  235};
-        case TILE_CAVE_WALL:  return { 60,  60,  60,  255 };
+        case TILE_CAVE_WALL: return { 60,  60,  60,  255 };
         case TILE_CAVE_FLOOR: return { 120, 120, 120, 255 };
-        case TILE_GEM:        return { 220, 180, 50,  255 };
+        case TILE_GEM: return { 220, 180, 50,  255 };
+        case TILE_VOID: return {0, 0, 0, 0};
         default: return MAGENTA;
     }
 }

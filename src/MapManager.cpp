@@ -33,7 +33,7 @@ static const std::vector<std::vector<int>> OUTDOOR_MAP = {
 static const std::vector<std::vector<int>> HOUSE_MAP = {
     { 4, 4, 4, 4, 4, 4, 4, 4 },
     { 4, 7, 7, 7, 7, 7, 7, 4 },
-    { 4, 7, 7, 7, 7, 7, 7, 4 },
+    { 4, 7, 7, 7, 4, 4, 4, 4 },
     { 4, 7, 7, 7, 7, 7, 7, 4 },
     { 4, 7, 7, 7, 7, 7, 7, 4 },
     { 4, 7, 7, 7, 7, 7, 7, 4 },
@@ -88,6 +88,32 @@ static const std::vector<std::vector<int>> BLOCKAGE_MAP = {
     { 2, 2, 6, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
 };
 
+// Blockage-interaction, story intro
+static const std::vector<std::vector<int>> Q1_CAVE = {
+    { 13, 13, 10, 10, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 10, 10, 10, 13, 13},
+    { 13, 10, 11, 11, 10, 13, 13, 13, 10, 13, 13, 13, 13, 13, 10, 11, 11, 11, 10, 13},
+    { 10, 11, 11, 11, 11, 10, 10, 10, 11, 10, 13, 1, 13, 13, 10, 11, 12, 11, 11, 10},
+    { 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 10, 10, 13, 13, 10, 11, 11, 11, 11, 10},
+    { 10, 11, 11, 11, 11, 11, 11, 10, 10, 11, 11, 11, 10, 13, 13, 10, 10, 11, 11, 10},
+    { 10, 11, 11, 11, 11, 11, 10, 13, 13, 10, 11, 11, 11, 10, 13, 13, 10, 11, 11, 10},
+    { 10, 11, 11, 11, 11, 10, 13, 13, 13, 13, 10, 10, 11, 11, 10, 10, 13, 10, 11, 10},
+    { 10, 11, 11, 11, 10, 13, 13, 13, 13, 13, 13, 13, 10, 11, 11, 11, 10, 10, 11, 10},
+    { 13, 10, 11, 11, 10, 13, 13, 13, 13, 13, 13, 13, 13, 10, 11, 11, 11, 10, 11, 10},
+    { 13, 10, 11, 10, 13, 13, 10, 10, 13, 13, 13, 13, 13, 13, 10, 11, 11, 10, 11, 10},
+    { 13, 10, 11, 10, 13, 10, 11, 11, 10, 13, 13, 13, 13, 13, 13, 10, 11, 10, 11, 10},
+    { 10, 13, 11, 11, 10, 11, 11, 11, 11, 10, 13, 13, 13, 13, 13, 10, 11, 10, 11, 10},
+    { 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 10, 13, 13, 10, 13, 10, 11, 10, 11, 10},
+    { 10, 11, 11, 11, 11, 11, 10, 11, 11, 11, 11, 10, 10, 11, 10, 10, 11, 10, 11, 10},
+    { 10, 11, 11, 11, 11, 10, 13, 10, 11, 11, 11, 11, 11, 11, 10, 10, 11, 10, 11, 10},
+    { 10, 11, 11, 11, 10, 13, 13, 13, 10, 11, 11, 11, 11, 11, 10, 10, 11, 11, 11, 10},
+    { 10, 11, 11, 11, 10, 13, 13, 13, 13, 10, 11, 11, 11, 11, 10, 10, 10, 10, 10, 10},
+    { 10, 11, 11, 11, 10, 13, 13, 13, 13, 13, 10, 11, 11, 11, 10, 13, 13, 13, 13, 13},
+    { 11, 11, 13, 10, 13, 13, 13, 13, 13, 13, 10, 10, 10, 10, 13, 13, 13, 13, 13, 13},
+    { 11, 11, 10, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13},
+
+
+};
+
 MapManager::MapManager() {
     RegisterMaps();
     // SwitchMap("outdoor", 10 * TILE_SIZE, 10 * TILE_SIZE); // start av spelet
@@ -99,6 +125,7 @@ void MapManager::RegisterMaps() {
     m_mapData["house"] = HOUSE_MAP;
     m_mapData["woods_first"] = FIRST_FILLER_MAP;
     m_mapData["blockage"] = BLOCKAGE_MAP;
+    m_mapData["q1_cave"] = Q1_CAVE;
 
     // Dörr på utomhuskartan: tile (10,4) leder till house
     m_doors["outdoor"].push_back({ 10, 4, "house", 3 * TILE_SIZE, 5 * TILE_SIZE });
@@ -116,12 +143,18 @@ void MapManager::RegisterMaps() {
     m_doors["woods_first"].push_back({ 2, 0, "blockage", 2 * TILE_SIZE, 18 * TILE_SIZE });
     // dörr tillbaka
     m_doors["blockage"].push_back({ 2, 19, "woods_first", 2 * TILE_SIZE, 1 * TILE_SIZE });
-
     //vakter i blockage
     m_npcs["blockage"].push_back(NPC(3 * TILE_SIZE, 8 * TILE_SIZE, "Vakt",
     "You can't pass here, sir!", { { 100, 100, 120, 255 }, { 60, 60, 60, 255 }, { 255, 213, 170, 255 } }));
     m_npcs["blockage"].push_back(NPC(4 * TILE_SIZE, 8 * TILE_SIZE, "Vakt",
-        "Find the crystal in the cave and bring it to us and we might let you in... ", { { 100, 100, 120, 255 }, { 60, 60, 60, 255 }, { 255, 213, 170, 255 } }));
+        "Find the crystal in the cave and bring it to us and we might let you in... ",
+        { { 100, 100, 120, 255 }, { 60, 60, 60, 255 }, { 255, 213, 170, 255 } }));
+
+    // Trigger från blockage till cave
+    /*m_doors["blockage"].push_back({ 18, 3, "q1_cave", 2 * TILE_SIZE, 15 * TILE_SIZE });
+    // Trigger tillbaka
+    m_doors["woods_first"].push_back({ 19, 15, "outdoor", 1 * TILE_SIZE, 6 * TILE_SIZE });*/
+
 }
 
 void MapManager::SwitchMap(const std::string& mapName, float spawnX, float spawnY) {

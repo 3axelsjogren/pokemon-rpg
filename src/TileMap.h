@@ -22,6 +22,7 @@ enum TileType {
     TILE_CAVE_WALL = 10,
     TILE_CAVE_FLOOR = 11,
     TILE_GEM = 12,
+    TILE_VOID = 13,
 };
 
 struct Tile {
