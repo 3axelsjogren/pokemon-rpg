@@ -42,7 +42,7 @@ static const std::vector<std::vector<int>> HOUSE_MAP = {
 
 // Äventyr-start
 static const std::vector<std::vector<int>> FIRST_FILLER_MAP = {
-    { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
+    { 2, 2, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
     { 2, 0, 3, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
     { 2, 0, 3, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 2 },
     { 2, 0, 3, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 2 },
@@ -64,6 +64,30 @@ static const std::vector<std::vector<int>> FIRST_FILLER_MAP = {
     { 2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
 };
 
+// Blockage-interaction, story intro
+static const std::vector<std::vector<int>> BLOCKAGE_MAP = {
+    { 2, 2, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
+    { 2, 0, 3, 3, 3, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 3, 3, 3, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 3, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 3, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 3, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 2, 2, 0, 0, 2 },
+    { 2, 0, 0, 3, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 2, 0, 0, 2 },
+    { 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 0, 0, 0, 2 },
+    { 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2 },
+    { 2, 2, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 2, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 2, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 3, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 3, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 1, 1, 0, 0, 0, 2 },
+    { 2, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 2 },
+    { 2, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1 },
+    { 2, 0, 3, 0, 0, 0, 0, 0, 2, 2, 1, 1, 0, 0, 2, 0, 0, 0, 1, 1 },
+    { 2, 0, 3, 0, 0, 0, 0, 2, 2, 2, 1, 1, 0, 2, 2, 2, 2, 2, 0, 2 },
+    { 2, 2, 6, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
+};
+
 MapManager::MapManager() {
     RegisterMaps();
     SwitchMap("outdoor", 10 * TILE_SIZE, 10 * TILE_SIZE);
@@ -73,21 +97,24 @@ void MapManager::RegisterMaps() {
     m_mapData["outdoor"] = OUTDOOR_MAP;
     m_mapData["house"] = HOUSE_MAP;
     m_mapData["woods_first"] = FIRST_FILLER_MAP;
+    m_mapData["blockage"] = BLOCKAGE_MAP;
 
     // Dörr på utomhuskartan: tile (10,4) leder till house
     m_doors["outdoor"].push_back({ 10, 4, "house", 3 * TILE_SIZE, 5 * TILE_SIZE });
-
     // Dörr i house: tile (3,6) leder tillbaka till outdoor
     m_doors["house"].push_back({ 3, 6, "outdoor", 10 * TILE_SIZE, 5 * TILE_SIZE });
-
     m_npcs["house"].push_back(NPC(3 * TILE_SIZE, 3 * TILE_SIZE, "Mamma",
-    "Ah, du ar vaken! Ga ut och utforska varlden, mitt barn.", { RED, { 180, 100, 20, 255 }, { 255, 213, 170, 255 } }));
+    "Ah you're awake! Go out and explore the world, my child!", { RED, { 180, 100, 20, 255 }, { 255, 213, 170, 255 } }));
 
-    // Trigger på outdoor: tile (1,6) - stigen vid vänsterkanten
+    // Trigger på outdoor: tile (0,6) - stigen vid vänsterkanten
     m_doors["outdoor"].push_back({ 0, 6, "woods_first", 18 * TILE_SIZE, 15 * TILE_SIZE });
-
-    // Trigger tillbaka: tile (19,10) på first_filler
+    // Trigger tillbaka: tile (19,15) på first_filler
     m_doors["woods_first"].push_back({ 19, 15, "outdoor", 1 * TILE_SIZE, 6 * TILE_SIZE });
+
+    // dörr till blockage
+    m_doors["woods_first"].push_back({ 2, 0, "blockage", 2 * TILE_SIZE, 18 * TILE_SIZE });
+    // dörr tillbaka
+    m_doors["blockage"].push_back({ 2, 19, "woods_first", 2 * TILE_SIZE, 1 * TILE_SIZE });
 }
 
 void MapManager::SwitchMap(const std::string& mapName, float spawnX, float spawnY) {
