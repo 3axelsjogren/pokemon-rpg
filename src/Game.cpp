@@ -54,7 +54,7 @@ void Game::Update(float dt) {
     if (m_mapManager->CheckDoorTrigger(center.x, center.y, spawnX, spawnY, targetMap)) {
         if (targetMap == "blockage" && m_state.hasGem)
             targetMap = "blockage_unlocked";
-        m_mapManager->SwitchMap(targetMap, spawnX, spawnY);
+        m_mapManager->SwitchMap(targetMap);
         m_player->SetPosition(spawnX, spawnY);
         m_camera.target = m_player->GetCenter();
     }
@@ -78,7 +78,7 @@ void Game::Update(float dt) {
         int tileY = static_cast<int>(center.y / TILE_SIZE);
         if (m_mapManager->GetCurrentMapName() == "q1_cave" && tileX == 16 && tileY == 2) {
             m_state.hasGem = true;
-            m_mapManager->SwitchMap("q1_cave_no_gem", center.x, center.y);
+            m_mapManager->SwitchMap("q1_cave_no_gem");
             m_dialog.Show("!", "You found a golden crystal! The guards fear your courage...");
         }
     }

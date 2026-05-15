@@ -160,8 +160,9 @@ static const std::vector<std::vector<int>> Q1_CAVE_NO_GEM = {
 
 MapManager::MapManager() {
     RegisterMaps();
-    // SwitchMap("outdoor", 10 * TILE_SIZE, 10 * TILE_SIZE); // start av spelet
-    SwitchMap("blockage", 3 * TILE_SIZE, 5 * TILE_SIZE); // quest1
+    // SwitchMap("outdoor"); // start av spelet
+    // SwitchMap("blockage"); // quest1
+    SwitchMap("blockage_unlocked");
 }
 
 void MapManager::RegisterMaps() {
@@ -208,7 +209,7 @@ void MapManager::RegisterMaps() {
 
 }
 
-void MapManager::SwitchMap(const std::string& mapName, float spawnX, float spawnY) {
+void MapManager::SwitchMap(const std::string& mapName) {
     auto& data = m_mapData[mapName];
     int w = static_cast<int>(data[0].size());
     int h = static_cast<int>(data.size());

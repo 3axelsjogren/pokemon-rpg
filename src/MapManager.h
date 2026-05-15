@@ -25,7 +25,7 @@ public:
     TileMap* GetCurrentMap() { return m_currentMap.get(); }
     std::string GetCurrentMapName() { return m_currentMapName; }
 
-    void SwitchMap(const std::string& mapName, float spawnX, float spawnY);
+    void SwitchMap(const std::string& mapName);
     bool CheckDoorTrigger(float playerX, float playerY, float& outSpawnX, float& outSpawnY, std::string& outTargetMap);
 
     std::vector<NPC>& GetNPCs() { return m_npcs[m_currentMapName]; }
