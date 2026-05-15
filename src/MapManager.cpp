@@ -160,8 +160,8 @@ static const std::vector<std::vector<int>> Q1_CAVE_NO_GEM = {
 
 MapManager::MapManager() {
     RegisterMaps();
-    // SwitchMap("outdoor"); // start av spelet
-    // SwitchMap("blockage"); // quest1
+    //SwitchMap("outdoor"); // start av spelet
+    //SwitchMap("blockage"); // quest1
     SwitchMap("blockage_unlocked");
 }
 
@@ -204,7 +204,7 @@ void MapManager::RegisterMaps() {
 
     // Samma dörrar som blockage
     m_doors["blockage_unlocked"].push_back({ 2, 19, "woods_first", 2 * TILE_SIZE, 1 * TILE_SIZE });
-    m_doors["blockage_unlocked"].push_back({ 18, 1, "q1_cave", 1 * TILE_SIZE, 18 * TILE_SIZE });
+    m_doors["blockage_unlocked"].push_back({ 18, 1, "q1_cave_no_gem", 1 * TILE_SIZE, 18 * TILE_SIZE });
     m_doors["q1_cave_no_gem"].push_back({ 0, 19, "blockage", 17 * TILE_SIZE, 2 * TILE_SIZE });
 
 }
