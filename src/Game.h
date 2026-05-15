@@ -21,6 +21,12 @@ private:
     std::unique_ptr<MapManager> m_mapManager;
     std::unique_ptr<Player> m_player;
     Camera2D m_camera;
+
     DialogBox m_dialog;
+
     GameState m_state;
+
+    Music m_musicOverworld;
+    Music m_musicCave;
+    Music m_musicCurrent;
 };

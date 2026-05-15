@@ -9,6 +9,12 @@ Game::Game() {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_TITLE);
     SetTargetFPS(TARGET_FPS);
 
+    InitAudioDevice();
+    m_musicOverworld = LoadMusicStream("assets/music/main_theme.ogg");
+    m_musicCave = LoadMusicStream("assets/music/cave.ogg");
+    m_musicCurrent = m_musicOverworld;
+    PlayMusicStream(m_musicCurrent);
+
     m_mapManager = std::make_unique<MapManager>();
 
     m_player = std::make_unique<Player>(10 * TILE_SIZE, 10 * TILE_SIZE);
@@ -24,6 +30,9 @@ Game::Game() {
 
 Game::~Game() {
     CloseWindow();
+    UnloadMusicStream(m_musicOverworld);
+    UnloadMusicStream(m_musicCave);
+    CloseAudioDevice();
 }
 
 void Game::Run() {
@@ -49,6 +58,19 @@ void Game::Update(float dt) {
         m_player->SetPosition(spawnX, spawnY);
         m_camera.target = m_player->GetCenter();
     }
+
+    // Musikbyte
+    std::string mapName = m_mapManager->GetCurrentMapName();
+    Music newMusic = (mapName == "q1_cave" || mapName == "q1_cave_no_gem")
+        ? m_musicCave : m_musicOverworld;
+
+    if (newMusic.stream.buffer != m_musicCurrent.stream.buffer) {
+        StopMusicStream(m_musicCurrent);
+        m_musicCurrent = newMusic;
+        PlayMusicStream(m_musicCurrent);
+    }
+
+    UpdateMusicStream(m_musicCurrent);
 
     // Plocka upp kristall
     if (!m_state.hasGem) {
