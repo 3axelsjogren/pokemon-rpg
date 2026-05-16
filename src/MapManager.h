@@ -41,6 +41,11 @@ private:
     std::unordered_map<std::string, std::vector<DoorLink>> m_doors;
 
     void RegisterMaps();
+    void RegisterOutdoor();
+    void RegisterHouse();
+    void RegisterWoodsFirst();
+    void RegisterBlockage();
+    void RegisterCave();
 };
 
 #endif //POKEMONRPG_MAPMANAGER_H

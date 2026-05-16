@@ -162,51 +162,55 @@ MapManager::MapManager() {
     RegisterMaps();
     //SwitchMap("outdoor"); // start av spelet
     //SwitchMap("blockage"); // quest1
-    SwitchMap("blockage_unlocked");
+    SwitchMap("blockage_unlocked"); // ingång till city efter quest1
 }
 
 void MapManager::RegisterMaps() {
-    m_mapData["outdoor"] = OUTDOOR_MAP;
-    m_mapData["house"] = HOUSE_MAP;
-    m_mapData["woods_first"] = FIRST_FILLER_MAP;
-    m_mapData["blockage"] = BLOCKAGE_MAP;
-    m_mapData["q1_cave"] = Q1_CAVE;
-    m_mapData["q1_cave_no_gem"] = Q1_CAVE_NO_GEM;
-    m_mapData["blockage_unlocked"] = BLOCKAGE_UNLOCKED_MAP;
+    RegisterOutdoor();
+    RegisterHouse();
+    RegisterWoodsFirst();
+    RegisterBlockage();
+    RegisterCave();
+}
 
-    // Dörr på utomhuskartan: tile (10,4) leder till house
+void MapManager::RegisterOutdoor() {
+    m_mapData["outdoor"] = OUTDOOR_MAP;
     m_doors["outdoor"].push_back({ 10, 4, "house", 3 * TILE_SIZE, 5 * TILE_SIZE });
-    // Dörr i house: tile (3,6) leder tillbaka till outdoor
+    m_doors["outdoor"].push_back({ 0, 6, "woods_first", 18 * TILE_SIZE, 15 * TILE_SIZE });
+}
+
+void MapManager::RegisterHouse() {
+    m_mapData["house"] = HOUSE_MAP;
     m_doors["house"].push_back({ 3, 6, "outdoor", 10 * TILE_SIZE, 5 * TILE_SIZE });
     m_npcs["house"].push_back(NPC(3 * TILE_SIZE, 3 * TILE_SIZE, "Mamma",
-    "Ah you're awake! Go out and explore the world, my child!", { RED, { 180, 100, 20, 255 }, { 255, 213, 170, 255 } }));
+        "Ah you're awake! Go out and explore the world, my child!", { RED, { 180, 100, 20, 255 }, { 255, 213, 170, 255 } }));
+}
 
-    // Trigger på outdoor: tile (0,6) - stigen vid vänsterkanten
-    m_doors["outdoor"].push_back({ 0, 6, "woods_first", 18 * TILE_SIZE, 15 * TILE_SIZE });
-    // Trigger tillbaka: tile (19,15) på first_filler
+void MapManager::RegisterWoodsFirst() {
+    m_mapData["woods_first"] = FIRST_FILLER_MAP;
     m_doors["woods_first"].push_back({ 19, 15, "outdoor", 1 * TILE_SIZE, 6 * TILE_SIZE });
-
-    // dörr till blockage
     m_doors["woods_first"].push_back({ 2, 0, "blockage", 2 * TILE_SIZE, 18 * TILE_SIZE });
-    // dörr tillbaka
+}
+
+void MapManager::RegisterBlockage() {
+    m_mapData["blockage"] = BLOCKAGE_MAP;
+    m_mapData["blockage_unlocked"] = BLOCKAGE_UNLOCKED_MAP;
     m_doors["blockage"].push_back({ 2, 19, "woods_first", 2 * TILE_SIZE, 1 * TILE_SIZE });
-    //vakter i blockage
+    m_doors["blockage"].push_back({ 18, 1, "q1_cave", 1 * TILE_SIZE, 18 * TILE_SIZE });
     m_npcs["blockage"].push_back(NPC(3 * TILE_SIZE, 8 * TILE_SIZE, "Vakt",
-    "You can't pass here, sir!", { { 100, 100, 120, 255 }, { 60, 60, 60, 255 }, { 255, 213, 170, 255 } }));
+        "You can't pass here, sir!", { { 100, 100, 120, 255 }, { 60, 60, 60, 255 }, { 255, 213, 170, 255 } }));
     m_npcs["blockage"].push_back(NPC(4 * TILE_SIZE, 8 * TILE_SIZE, "Vakt",
         "Find the crystal in the cave and bring it to us and we might let you in... ",
         { { 100, 100, 120, 255 }, { 60, 60, 60, 255 }, { 255, 213, 170, 255 } }));
-
-    // Trigger från blockage till cave
-    m_doors["blockage"].push_back({ 18, 1, "q1_cave", 1 * TILE_SIZE, 18 * TILE_SIZE });
-    // Trigger tillbaka
-    m_doors["q1_cave"].push_back({ 0, 19, "blockage", 17 * TILE_SIZE, 2 * TILE_SIZE });
-
-    // Samma dörrar som blockage
     m_doors["blockage_unlocked"].push_back({ 2, 19, "woods_first", 2 * TILE_SIZE, 1 * TILE_SIZE });
     m_doors["blockage_unlocked"].push_back({ 18, 1, "q1_cave_no_gem", 1 * TILE_SIZE, 18 * TILE_SIZE });
-    m_doors["q1_cave_no_gem"].push_back({ 0, 19, "blockage", 17 * TILE_SIZE, 2 * TILE_SIZE });
+}
 
+void MapManager::RegisterCave() {
+    m_mapData["q1_cave"] = Q1_CAVE;
+    m_mapData["q1_cave_no_gem"] = Q1_CAVE_NO_GEM;
+    m_doors["q1_cave"].push_back({ 0, 19, "blockage", 17 * TILE_SIZE, 2 * TILE_SIZE });
+    m_doors["q1_cave_no_gem"].push_back({ 0, 19, "blockage", 17 * TILE_SIZE, 2 * TILE_SIZE });
 }
 
 void MapManager::SwitchMap(const std::string& mapName) {
