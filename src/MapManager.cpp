@@ -96,7 +96,7 @@ static const std::vector<std::vector<int>> BLOCKAGE_UNLOCKED_MAP = {
     { 2, 0, 0, 3, 3, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
     { 2, 0, 0, 3, 3, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 2, 2, 0, 0, 2 },
     { 2, 0, 0, 3, 3, 0, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 2, 0, 0, 2 },
-    { 2, 2, 2, 6, 6, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 0, 0, 0, 2 },  // 8 -> 6
+    { 2, 2, 2, 6, 6, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 0, 0, 0, 2 },
     { 2, 2, 2, 3, 3, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2 },
     { 2, 2, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
     { 2, 2, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
@@ -158,6 +158,30 @@ static const std::vector<std::vector<int>> Q1_CAVE_NO_GEM = {
     { 11, 11, 10, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13},
 };
 
+// first city
+static const std::vector<std::vector<int>> FIRST_CITY = {
+    { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10},
+    { 10, 11, 11, 11, 14, 14, 14, 14, 14, 14, 14, 14, 11, 11, 11, 11, 11, 11, 11, 10},
+    { 10, 11, 11, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 11, 10, 10, 10, 10, 11, 10},
+    { 10, 11, 11, 14, 14, 11, 11, 10, 10, 10, 10, 14, 14, 11, 10, 10, 10, 10, 11, 10},
+    { 10, 11, 11, 14, 14, 11, 11, 10, 10, 10, 10, 11, 14, 11, 10, 10, 10, 10, 11, 10},
+    { 10, 11, 11, 14, 14, 14, 14,  6, 10, 10, 10, 11, 14, 11, 10,  6, 10, 10, 11, 10},
+    { 10, 11, 11, 14, 14, 11, 11, 10, 10, 10, 10, 11, 14, 11, 11, 11, 11, 11, 11, 10},
+    { 10, 11, 11, 14, 14, 11, 11, 11, 11, 11, 10, 11, 14, 14, 14, 14, 14, 14, 11, 10},
+    { 10, 11, 11, 14, 14, 11, 11, 11, 11, 11, 10, 11, 14, 11, 11, 11, 11, 11, 11, 10},
+    { 10, 11, 11, 14, 14, 11, 11, 10, 10, 10, 10, 11, 14, 11, 10, 10, 10, 10, 11, 10},
+    { 10, 11, 11, 14, 14, 11, 11, 10, 10, 10, 10, 11, 14, 11, 10, 10, 10,  6, 11, 10},
+    { 10, 11, 11, 14, 14, 14, 14,  6, 10, 10, 10, 11, 14, 11, 10, 10, 10, 10, 11, 10},
+    { 10, 11, 11, 14, 14, 11, 11, 10, 10, 10, 10, 11, 14, 11, 10, 10, 10, 10, 11, 10},
+    { 10, 11, 11, 14, 14, 11, 11, 11, 11, 11, 10, 11, 14, 11, 11, 11, 11, 11, 11, 10},
+    { 10, 11, 11, 14, 14, 11, 11, 11, 11, 11, 10, 11, 14, 11, 11, 11, 11, 11, 11, 10},
+    { 10, 11, 11, 14, 14, 11, 11, 10, 10, 10, 10, 11, 14, 14, 14, 14, 14, 14, 14,  6},
+    { 10, 11, 11, 14, 14, 14, 14,  6, 10, 10, 10, 11, 14, 14, 14, 14, 14, 14, 14,  6},
+    { 10, 11, 11, 14, 14, 11, 11, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 10},
+    { 10, 11, 11, 14, 14, 11, 11, 10, 10, 10, 10, 11, 11,  2, 11,  2, 11,  2, 11, 10},
+    { 10, 10, 10,  6,  6, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10},
+};
+
 MapManager::MapManager() {
     RegisterMaps();
     //SwitchMap("outdoor"); // start av spelet
@@ -171,6 +195,7 @@ void MapManager::RegisterMaps() {
     RegisterWoodsFirst();
     RegisterBlockage();
     RegisterCave();
+    RegisterCity();
 }
 
 void MapManager::RegisterOutdoor() {
@@ -204,6 +229,10 @@ void MapManager::RegisterBlockage() {
         { { 100, 100, 120, 255 }, { 60, 60, 60, 255 }, { 255, 213, 170, 255 } }));
     m_doors["blockage_unlocked"].push_back({ 2, 19, "woods_first", 2 * TILE_SIZE, 1 * TILE_SIZE });
     m_doors["blockage_unlocked"].push_back({ 18, 1, "q1_cave_no_gem", 1 * TILE_SIZE, 18 * TILE_SIZE });
+
+    // till city
+    m_doors["blockage_unlocked"].push_back({ 3, 0, "first_city", 3 * TILE_SIZE, 18 * TILE_SIZE });
+    m_doors["blockage_unlocked"].push_back({ 4, 0, "first_city", 4 * TILE_SIZE, 18 * TILE_SIZE });
 }
 
 void MapManager::RegisterCave() {
@@ -211,6 +240,12 @@ void MapManager::RegisterCave() {
     m_mapData["q1_cave_no_gem"] = Q1_CAVE_NO_GEM;
     m_doors["q1_cave"].push_back({ 0, 19, "blockage", 17 * TILE_SIZE, 2 * TILE_SIZE });
     m_doors["q1_cave_no_gem"].push_back({ 0, 19, "blockage", 17 * TILE_SIZE, 2 * TILE_SIZE });
+}
+
+void MapManager::RegisterCity() {
+    m_mapData["first_city"] = FIRST_CITY;
+    m_doors["first_city"].push_back({ 3, 19, "blockage_unlocked", 3 * TILE_SIZE, 1 * TILE_SIZE });
+    m_doors["first_city"].push_back({ 4, 19, "blockage_unlocked", 4 * TILE_SIZE, 1 * TILE_SIZE });
 }
 
 void MapManager::SwitchMap(const std::string& mapName) {

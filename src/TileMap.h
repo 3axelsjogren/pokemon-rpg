@@ -23,6 +23,9 @@ enum TileType {
     TILE_CAVE_FLOOR = 11,
     TILE_GEM = 12,
     TILE_VOID = 13,
+
+    // city
+    TILE_CITY_ROAD = 14,
 };
 
 struct Tile {

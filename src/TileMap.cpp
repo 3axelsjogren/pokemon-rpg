@@ -68,6 +68,7 @@ Color TileMap::TileColor(TileType type) const {
         case TILE_CAVE_FLOOR: return { 120, 120, 120, 255 };
         case TILE_GEM: return { 220, 180, 50,  255 };
         case TILE_VOID: return {0, 0, 0, 0};
+        case TILE_CITY_ROAD: return {100, 100, 110, 255};
         default: return MAGENTA;
     }
 }

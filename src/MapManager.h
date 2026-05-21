@@ -46,6 +46,7 @@ private:
     void RegisterWoodsFirst();
     void RegisterBlockage();
     void RegisterCave();
+    void RegisterCity();
 };
 
 #endif //POKEMONRPG_MAPMANAGER_H
