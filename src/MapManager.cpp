@@ -182,6 +182,16 @@ static const std::vector<std::vector<int>> FIRST_CITY = {
     { 10, 10, 10,  6,  6, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10},
 };
 
+static const std::vector<std::vector<int>> APARATMENT = {
+    { 4, 4, 4, 4, 4, 4, 4, 4 },
+    { 4, 7, 7, 7, 7, 7, 7, 4 },
+    { 4, 7, 7, 7, 4, 4, 4, 4 },
+    { 4, 7, 7, 7, 7, 7, 7, 4 },
+    { 6, 7, 7, 7, 7, 7, 7, 4 },
+    { 4, 7, 7, 7, 7, 7, 7, 4 },
+    { 4, 4, 4, 4, 4, 4, 4, 4 },  // 6 = dörr ut, 4 = väggar, 7 = golv
+};
+
 MapManager::MapManager() {
     RegisterMaps();
     //SwitchMap("outdoor"); // start av spelet
@@ -246,6 +256,15 @@ void MapManager::RegisterCity() {
     m_mapData["first_city"] = FIRST_CITY;
     m_doors["first_city"].push_back({ 3, 19, "blockage_unlocked", 3 * TILE_SIZE, 1 * TILE_SIZE });
     m_doors["first_city"].push_back({ 4, 19, "blockage_unlocked", 4 * TILE_SIZE, 1 * TILE_SIZE });
+
+    //apartaments
+    m_mapData["apartament"] = APARATMENT;
+
+    //apt-01
+    m_doors["first_city"].push_back({7, 16, "apartament", 1 * TILE_SIZE, 4 * TILE_SIZE });
+    m_doors["apartament"].push_back({0, 4, "first_city", 6 * TILE_SIZE, 16 * TILE_SIZE });
+
+    
 }
 
 void MapManager::SwitchMap(const std::string& mapName) {
@@ -257,6 +276,7 @@ void MapManager::SwitchMap(const std::string& mapName) {
     m_currentMapName = mapName;
 }
 
+//rör INTE
 bool MapManager::CheckDoorTrigger(float playerX, float playerY, float& outSpawnX, float& outSpawnY, std::string& outTargetMap) {
     int tileX = static_cast<int>(playerX / TILE_SIZE);
     int tileY = static_cast<int>(playerY / TILE_SIZE);
