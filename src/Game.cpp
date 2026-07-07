@@ -19,7 +19,7 @@ Game::Game() {
 
     m_mapManager = std::make_unique<MapManager>();
 
-    m_player = std::make_unique<Player>(10 * TILE_SIZE, 10 * TILE_SIZE);
+    m_player = std::make_unique<Player>(2 * TILE_SIZE, 14 * TILE_SIZE); // spawn 
 
     m_camera = {};
     m_camera.zoom = 1.5f;

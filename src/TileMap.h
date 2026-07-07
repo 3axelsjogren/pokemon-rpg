@@ -44,7 +44,7 @@ public:
     bool IsSolid(int tileX, int tileY) const;
     bool IsSolidWorld(float worldX, float worldY) const;
 
-    int GetWidth()  const { return m_width; }
+    int GetWidth() const { return m_width; }
     int GetHeight() const { return m_height; }
 
 private:

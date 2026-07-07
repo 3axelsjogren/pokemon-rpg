@@ -192,11 +192,22 @@ static const std::vector<std::vector<int>> APARATMENT = {
     { 4, 4, 4, 4, 4, 4, 4, 4 },  // 6 = dörr ut, 4 = väggar, 7 = golv
 };
 
+static const std::vector<std::vector<int>> APARATMENT_2 = {
+    { 4, 4, 4, 4, 4, 4, 4, 4 },
+    { 4, 7, 7, 7, 7, 7, 7, 4 },
+    { 4, 4, 4, 4, 4, 7, 7, 4 },
+    { 4, 7, 7, 7, 4, 7, 7, 4 },
+    { 6, 7, 7, 7, 7, 7, 7, 4 },
+    { 4, 7, 7, 7, 4, 7, 7, 4 },
+    { 4, 4, 4, 4, 4, 4, 4, 4 },  // 6 = dörr ut, 4 = väggar, 7 = golv
+};
+
 MapManager::MapManager() {
     RegisterMaps();
     //SwitchMap("outdoor"); // start av spelet
     //SwitchMap("blockage"); // quest1
-    SwitchMap("blockage_unlocked"); // ingång till city efter quest1
+    //SwitchMap("blockage_unlocked"); // ingång till city efter quest1
+    SwitchMap("first_city"); // start av city
 }
 
 void MapManager::RegisterMaps() {
@@ -264,7 +275,11 @@ void MapManager::RegisterCity() {
     m_doors["first_city"].push_back({7, 16, "apartament", 1 * TILE_SIZE, 4 * TILE_SIZE });
     m_doors["apartament"].push_back({0, 4, "first_city", 6 * TILE_SIZE, 16 * TILE_SIZE });
 
-    
+    m_mapData["apartament_2"] = APARATMENT_2;
+
+    //apt-02
+    m_doors["first_city"].push_back({7, 11, "apartament_2", 1 * TILE_SIZE, 4 * TILE_SIZE });
+    m_doors["apartament_2"].push_back({0, 4, "first_city", 6 * TILE_SIZE, 11 * TILE_SIZE });
 }
 
 void MapManager::SwitchMap(const std::string& mapName) {
