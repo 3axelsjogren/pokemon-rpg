@@ -222,6 +222,16 @@ static const std::vector<std::vector<int>> APARATMENT_4 = {
     { 4, 4, 6, 4, 4, 4, 4, 4 },  // 6 = dörr ut, 4 = väggar, 7 = golv
 };
 
+static const std::vector<std::vector<int>> APARATMENT_5 = {
+    { 4, 4, 4, 4, 4, 4, 4, 4 },
+    { 4, 7, 7, 7, 7, 7, 7, 4 },
+    { 4, 4, 7, 4, 7, 7, 7, 6 },
+    { 4, 7, 7, 7, 4, 7, 7, 4 },
+    { 4, 7, 7, 7, 4, 7, 7, 4 },
+    { 4, 7, 7, 7, 7, 7, 7, 4 },
+    { 4, 4, 4, 4, 4, 4, 4, 4 },  // 6 = dörr ut, 4 = väggar, 7 = golv
+};
+
 MapManager::MapManager() {
     RegisterMaps();
     //SwitchMap("outdoor"); // start av spelet
@@ -316,7 +326,15 @@ void MapManager::RegisterCity() {
         { { 200, 60, 60, 255 }, { 120, 60, 20, 255 }, { 255, 213, 170, 255 } }));
     
     //apt-05
-    
+    m_mapData["apartament_5"] = APARATMENT_5;
+    m_doors["first_city"].push_back({17, 10, "apartament_5", 6 * TILE_SIZE, 2 * TILE_SIZE });
+    m_doors["apartament_5"].push_back({7, 2, "first_city", 18 * TILE_SIZE, 10 * TILE_SIZE });
+    m_npcs["apartament_5"].push_back(NPC(2 * TILE_SIZE, 4 * TILE_SIZE, "Gubbfan",
+        "This crystal holds ancient power. The temple up north is sealed by it, find a way to open it.",
+        { {  40, 80, 40, 255 }, { 180, 180, 180, 255 }, { 255, 213, 170, 255 } }));
+
+    //transitions till woods_2
+
 }
 
 void MapManager::SwitchMap(const std::string& mapName) {
