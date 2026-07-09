@@ -182,7 +182,7 @@ static const std::vector<std::vector<int>> FIRST_CITY = {
     { 10, 10, 10,  6,  6, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10},
 };
 
-static const std::vector<std::vector<int>> APARATMENT = {
+static const std::vector<std::vector<int>> APARATMENT_1 = {
     { 4, 4, 4, 4, 4, 4, 4, 4 },
     { 4, 7, 7, 7, 7, 7, 7, 4 },
     { 4, 7, 7, 7, 4, 4, 4, 4 },
@@ -200,6 +200,26 @@ static const std::vector<std::vector<int>> APARATMENT_2 = {
     { 6, 7, 7, 7, 7, 7, 7, 4 },
     { 4, 7, 7, 7, 4, 7, 7, 4 },
     { 4, 4, 4, 4, 4, 4, 4, 4 },  // 6 = dörr ut, 4 = väggar, 7 = golv
+};
+
+static const std::vector<std::vector<int>> APARATMENT_3 = {
+    { 4, 4, 4, 4, 4, 4, 4, 4 },
+    { 4, 7, 7, 7, 7, 7, 7, 4 },
+    { 4, 7, 7, 7, 7, 7, 7, 4 },
+    { 4, 4, 7, 4, 7, 7, 7, 4 },
+    { 6, 7, 7, 4, 7, 7, 7, 4 },
+    { 4, 7, 7, 4, 4, 7, 7, 4 },
+    { 4, 4, 4, 4, 4, 4, 4, 4 },  // 6 = dörr ut, 4 = väggar, 7 = golv
+};
+
+static const std::vector<std::vector<int>> APARATMENT_4 = {
+    { 4, 4, 4, 4, 4, 4, 4, 4 },
+    { 4, 7, 7, 7, 7, 7, 7, 4 },
+    { 4, 7, 7, 7, 7, 7, 7, 4 },
+    { 4, 4, 7, 4, 7, 4, 7, 4 },
+    { 4, 7, 7, 4, 7, 4, 7, 4 },
+    { 4, 7, 7, 4, 7, 7, 7, 4 },
+    { 4, 4, 6, 4, 4, 4, 4, 4 },  // 6 = dörr ut, 4 = väggar, 7 = golv
 };
 
 MapManager::MapManager() {
@@ -269,17 +289,34 @@ void MapManager::RegisterCity() {
     m_doors["first_city"].push_back({ 4, 19, "blockage_unlocked", 4 * TILE_SIZE, 1 * TILE_SIZE });
 
     //apartaments
-    m_mapData["apartament"] = APARATMENT;
 
+    //block01
     //apt-01
-    m_doors["first_city"].push_back({7, 16, "apartament", 1 * TILE_SIZE, 4 * TILE_SIZE });
-    m_doors["apartament"].push_back({0, 4, "first_city", 6 * TILE_SIZE, 16 * TILE_SIZE });
-
-    m_mapData["apartament_2"] = APARATMENT_2;
+    m_mapData["apartament_1"] = APARATMENT_1;
+    m_doors["first_city"].push_back({7, 16, "apartament_1", 1 * TILE_SIZE, 4 * TILE_SIZE });
+    m_doors["apartament_1"].push_back({0, 4, "first_city", 6 * TILE_SIZE, 16 * TILE_SIZE });
 
     //apt-02
+    m_mapData["apartament_2"] = APARATMENT_2;
     m_doors["first_city"].push_back({7, 11, "apartament_2", 1 * TILE_SIZE, 4 * TILE_SIZE });
     m_doors["apartament_2"].push_back({0, 4, "first_city", 6 * TILE_SIZE, 11 * TILE_SIZE });
+
+    //apt-03
+    m_mapData["apartament_3"] = APARATMENT_3;
+    m_doors["first_city"].push_back({7, 5, "apartament_3", 1 * TILE_SIZE, 4 * TILE_SIZE });
+    m_doors["apartament_3"].push_back({0, 4, "first_city", 6 * TILE_SIZE, 5 * TILE_SIZE });
+
+    //block2
+    //apt-04
+    m_mapData["apartament_4"] = APARATMENT_4;
+    m_doors["first_city"].push_back({15, 5, "apartament_4", 2 * TILE_SIZE, 5 * TILE_SIZE });
+    m_doors["apartament_4"].push_back({2, 6, "first_city", 15 * TILE_SIZE, 6 * TILE_SIZE });
+    m_npcs["apartament_4"].push_back(NPC(5 * TILE_SIZE, 2 * TILE_SIZE, "Invånare",
+        "Wow! Is that the cave crystal? The old man down the street might know more",
+        { { 200, 60, 60, 255 }, { 120, 60, 20, 255 }, { 255, 213, 170, 255 } }));
+    
+    //apt-05
+    
 }
 
 void MapManager::SwitchMap(const std::string& mapName) {
