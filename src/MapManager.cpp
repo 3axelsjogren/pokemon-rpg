@@ -40,7 +40,7 @@ static const std::vector<std::vector<int>> HOUSE_MAP = {
     { 4, 4, 4, 6, 4, 4, 4, 4 },  // 6 = dörr ut, 4 = väggar, 7 = golv
 };
 
-// Äventyr-start
+// Äventyr-start (woods1)
 static const std::vector<std::vector<int>> FIRST_FILLER_MAP = {
     { 2, 2, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
     { 2, 0, 3, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
@@ -232,12 +232,36 @@ static const std::vector<std::vector<int>> APARATMENT_5 = {
     { 4, 4, 4, 4, 4, 4, 4, 4 },  // 6 = dörr ut, 4 = väggar, 7 = golv
 };
 
+static const std::vector<std::vector<int>> WOODS_2 = {
+    { 2, 2, 2, 2, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
+    { 2, 0, 0, 0, 3, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 0, 3, 0, 0, 0, 1, 1, 0, 0, 0, 3, 3, 3, 3, 3, 0, 2 },
+    { 2, 0, 0, 0, 3, 3, 3, 5, 5, 3, 3, 3, 3, 3, 0, 1, 0, 3, 0, 2 },
+    { 2, 0, 0, 0, 0, 3, 3, 5, 5, 3, 3, 0, 0, 0, 1, 1, 0, 3, 0, 2 },
+    { 2, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 2, 2, 1, 1, 1, 0, 3, 0, 2 },
+    { 2, 0, 0, 2, 2, 2, 0, 1, 1, 2, 2, 2, 0, 0, 0, 0, 0, 3, 0, 2 },
+    { 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 0, 0, 0, 0, 0, 0, 3, 0, 2 },
+    { 2, 2, 2, 2, 0, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 2 },
+    { 2, 2, 2, 0, 0, 0, 3, 5, 5, 3, 0, 0, 0, 0, 0, 3, 3, 0, 0, 2 },
+    { 2, 2, 0, 0, 3, 3, 3, 5, 5, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 2 },
+    { 2, 0, 0, 0, 3, 0, 3, 5, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 0, 3, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 0, 3, 0, 0, 1, 1, 0, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1 },
+    { 2, 0, 0, 0, 3, 0, 1, 1, 0, 0, 0, 2, 2, 0, 0, 1, 1, 1, 1, 1 },
+    { 2, 0, 0, 0, 3, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1 },
+    { 6, 3, 3, 3, 3, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1 },
+    { 6, 3, 3, 3, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 2, 2, 2, 0, 2 },
+    { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
+};
+
 MapManager::MapManager() {
     RegisterMaps();
     //SwitchMap("outdoor"); // start av spelet
     //SwitchMap("blockage"); // quest1
     //SwitchMap("blockage_unlocked"); // ingång till city efter quest1
-    SwitchMap("first_city"); // start av city
+    //SwitchMap("first_city"); // start av city
+    SwitchMap("woods2");
 }
 
 void MapManager::RegisterMaps() {
@@ -247,6 +271,7 @@ void MapManager::RegisterMaps() {
     RegisterBlockage();
     RegisterCave();
     RegisterCity();
+    RegisterWoods2();
 }
 
 void MapManager::RegisterOutdoor() {
@@ -334,7 +359,16 @@ void MapManager::RegisterCity() {
         { {  40, 80, 40, 255 }, { 180, 180, 180, 255 }, { 255, 213, 170, 255 } }));
 
     //transitions till woods_2
+    m_doors["first_city"].push_back({19, 15, "woods2", 1 * TILE_SIZE, 16 * TILE_SIZE });
+    m_doors["first_city"].push_back({19, 16, "woods2", 1 * TILE_SIZE, 17 * TILE_SIZE });
 
+}
+
+void MapManager::RegisterWoods2(){
+    m_mapData["woods2"] = WOODS_2;
+
+    m_doors["woods2"].push_back({0, 16, "first_city", 18 * TILE_SIZE, 15 * TILE_SIZE });
+    m_doors["woods2"].push_back({0, 17, "first_city", 18 * TILE_SIZE, 16 * TILE_SIZE });
 }
 
 void MapManager::SwitchMap(const std::string& mapName) {

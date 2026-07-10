@@ -12,7 +12,7 @@ Game::Game() {
     InitAudioDevice();
     m_musicOverworld = LoadMusicStream("assets/music/main_theme.ogg");
     m_musicCave = LoadMusicStream("assets/music/cave.ogg");
-    SetMusicVolume(m_musicOverworld, 0.1f);  // 0.0 = tyst, 1.0 = max
+    SetMusicVolume(m_musicOverworld, 0.0f);  // 0.0 = tyst, 1.0 = max
     SetMusicVolume(m_musicCave, 0.1f);
     m_musicCurrent = m_musicOverworld;
     PlayMusicStream(m_musicCurrent);
