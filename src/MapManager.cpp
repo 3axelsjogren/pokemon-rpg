@@ -255,13 +255,38 @@ static const std::vector<std::vector<int>> WOODS_2 = {
     { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
 };
 
+// Temple utsida
+static const std::vector<std::vector<int>> TEMPLE_OUTSIDE = {
+    { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
+    { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2 },
+    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2 },
+    { 2, 0, 0, 0, 0, 0, 0,10,10,10,10,10,10, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 0, 0, 0,10,11,11,11,11,11,11,10, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 0, 0, 0,10,11,11,11,11,11,11,10, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 0, 0, 0,10,11,11,11,11,11,11,10, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 2, 0, 0, 0,10,11,11,11,11,11,11,10, 0, 0, 0, 2, 0, 2 },
+    { 2, 0, 2, 0, 0, 0,10,11,11,11,11,11,11,10, 0, 0, 0, 2, 0, 2 },
+    { 2, 0, 0, 0, 0, 0,10,11,11,11,11,11,11,10, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 0, 0, 0,10,10,10, 6, 6,10,10,10, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 2, 2, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 2, 2, 0, 0, 2 },
+    { 2, 0, 0, 2, 2, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 2, 2, 0, 0, 2 },
+    { 2, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+    { 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
+};
+
 MapManager::MapManager() {
     RegisterMaps();
     //SwitchMap("outdoor"); // start av spelet
     //SwitchMap("blockage"); // quest1
     //SwitchMap("blockage_unlocked"); // ingång till city efter quest1
     //SwitchMap("first_city"); // start av city
-    SwitchMap("woods2");
+    //SwitchMap("woods2");
+    SwitchMap("temple_out");
 }
 
 void MapManager::RegisterMaps() {
@@ -272,6 +297,7 @@ void MapManager::RegisterMaps() {
     RegisterCave();
     RegisterCity();
     RegisterWoods2();
+    RegisterTemple();
 }
 
 void MapManager::RegisterOutdoor() {
@@ -369,6 +395,14 @@ void MapManager::RegisterWoods2(){
 
     m_doors["woods2"].push_back({0, 16, "first_city", 18 * TILE_SIZE, 15 * TILE_SIZE });
     m_doors["woods2"].push_back({0, 17, "first_city", 18 * TILE_SIZE, 16 * TILE_SIZE });
+
+    m_mapData["temple_out"] = TEMPLE_OUTSIDE;
+    m_doors["woods2"].push_back({4, 0, "temple_out", 9 * TILE_SIZE, 18 * TILE_SIZE });
+}
+
+void MapManager::RegisterTemple(){
+    m_doors["temple_out"].push_back({9, 19, "woods2", 4 * TILE_SIZE, 1 * TILE_SIZE });
+    m_doors["temple_out"].push_back({10, 19, "woods2", 4 * TILE_SIZE, 1 * TILE_SIZE });
 }
 
 void MapManager::SwitchMap(const std::string& mapName) {
