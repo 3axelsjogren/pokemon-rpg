@@ -164,7 +164,7 @@ void Game::Draw(){
 }
 
 void Game::DrawHUD(){
-    DrawFPS(8, 8);
+    DrawText(TextFormat("FPS: %d", GetFPS()), 8, 8, 16, YELLOW);
     DrawText(m_mapManager->GetCurrentMapName().c_str(), 8, SCREEN_HEIGHT - 44, 16, YELLOW);
     DrawText("WASD / Arrow keys to move", 8, SCREEN_HEIGHT - 24, 16, LIGHTGRAY);
     if (m_mapManager->GetCurrentMapName() == "temple_puzzle"){
