@@ -311,8 +311,8 @@ MapManager::MapManager() {
     //SwitchMap("blockage_unlocked"); // ingång till city efter quest1
     //SwitchMap("first_city"); // start av city
     //SwitchMap("woods2");
-    //SwitchMap("temple_out");
-    SwitchMap("temple_puzzle");
+    SwitchMap("temple_out");
+    //SwitchMap("temple_puzzle");
 }
 
 void MapManager::RegisterMaps() {
@@ -431,6 +431,9 @@ void MapManager::RegisterTemple(){
     m_doors["temple_out"].push_back({10, 19, "woods2", 4 * TILE_SIZE, 1 * TILE_SIZE });
 
     m_mapData["temple_puzzle"] = TEMPLE_PUZZLE;
+    m_doors["temple_out"].push_back({9, 11, "temple_puzzle", 3 * TILE_SIZE, 18 * TILE_SIZE });
+    m_doors["temple_out"].push_back({10, 11, "temple_puzzle", 3 * TILE_SIZE, 18 * TILE_SIZE });
+    m_doors["temple_puzzle"].push_back({3, 19, "temple_out", 9 * TILE_SIZE, 12 * TILE_SIZE });
 }
 
 void MapManager::SwitchMap(const std::string& mapName) {

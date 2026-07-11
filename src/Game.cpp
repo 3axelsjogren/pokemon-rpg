@@ -81,9 +81,9 @@ void Game::Update(float dt){
     std::string targetMap;
     Vector2 center = m_player->GetCenter();
     if (m_mapManager->CheckDoorTrigger(center.x, center.y, spawnX, spawnY, targetMap)){
-        if (targetMap == "blockage" && m_state.hasGem)
-            targetMap = "blockage_unlocked";
+        if (targetMap == "blockage" && m_state.hasGem) targetMap = "blockage_unlocked";
 
+        m_state.hasGem = true; // tillfällig under utveckling ----------------- MISSA INTE
         if (targetMap == "temple_puzzle" && !m_state.hasGem){
             m_dialog.Show("!", "The temple is sealed. You need the crystal.");
         }
