@@ -53,6 +53,12 @@ bool TileMap::IsSolidWorld(float worldX, float worldY) const {
     return IsSolid(tx,ty);
 }
 
+TileType TileMap::GetTileType(int tileX, int tileY) const {
+    if (tileX < 0 || tileY < 0 || tileX >= m_width || tileY >= m_height)
+        return TILE_VOID;
+    return m_tiles[tileY][tileX].type;
+}
+
 Color TileMap::TileColor(TileType type) const {
     switch (type) {
         case TILE_GRASS: return { 106, 168, 79,  255 };
@@ -69,6 +75,7 @@ Color TileMap::TileColor(TileType type) const {
         case TILE_GEM: return { 220, 180, 50,  255 };
         case TILE_VOID: return {0, 0, 0, 0};
         case TILE_CITY_ROAD: return {100, 100, 110, 255};
+        case TILE_LAVA: return {220, 80, 20, 255};
         default: return MAGENTA;
     }
 }

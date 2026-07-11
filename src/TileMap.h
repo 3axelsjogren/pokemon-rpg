@@ -26,6 +26,8 @@ enum TileType {
 
     // city
     TILE_CITY_ROAD = 14,
+
+    TILE_LAVA = 15,
 };
 
 struct Tile {
@@ -46,6 +48,7 @@ public:
 
     int GetWidth() const { return m_width; }
     int GetHeight() const { return m_height; }
+    TileType GetTileType(int tileX, int tileY) const;
 
 private:
     int m_width, m_height;
