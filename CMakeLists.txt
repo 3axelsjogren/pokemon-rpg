@@ -27,7 +27,8 @@ add_executable(${PROJECT_NAME} ${SOURCES}
         src/NPC.cpp
         src/NPC.h
         src/DialogBox.cpp
-        src/DialogBox.h)
+        src/DialogBox.h
+        src/BattleManager.h)
 
 target_link_libraries(${PROJECT_NAME} raylib)
 

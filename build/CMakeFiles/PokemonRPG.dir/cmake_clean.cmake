@@ -1,6 +1,10 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.o"
+  "CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.o.d"
   "CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.o"
   "CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.o.d"
+  "CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.o"
+  "CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.o.d"
   "CMakeFiles/PokemonRPG.dir/src/Game.cpp.o"
   "CMakeFiles/PokemonRPG.dir/src/Game.cpp.o.d"
   "CMakeFiles/PokemonRPG.dir/src/MapManager.cpp.o"

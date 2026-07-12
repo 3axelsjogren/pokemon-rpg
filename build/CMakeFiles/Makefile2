@@ -85,12 +85,12 @@ clean: CMakeFiles/PokemonRPG.dir/clean
 CMakeFiles/PokemonRPG.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PokemonRPG.dir/build.make CMakeFiles/PokemonRPG.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PokemonRPG.dir/build.make CMakeFiles/PokemonRPG.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target PokemonRPG"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10 "Built target PokemonRPG"
 .PHONY : CMakeFiles/PokemonRPG.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/PokemonRPG.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/axel/dev/pokemon-rpg/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/axel/dev/pokemon-rpg/build/CMakeFiles 10
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/PokemonRPG.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/axel/dev/pokemon-rpg/build/CMakeFiles 0
 .PHONY : CMakeFiles/PokemonRPG.dir/rule
@@ -102,7 +102,7 @@ PokemonRPG: CMakeFiles/PokemonRPG.dir/rule
 # codegen rule for target.
 CMakeFiles/PokemonRPG.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PokemonRPG.dir/build.make CMakeFiles/PokemonRPG.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Finished codegen for target PokemonRPG"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10 "Finished codegen for target PokemonRPG"
 .PHONY : CMakeFiles/PokemonRPG.dir/codegen
 
 # clean rule for target.

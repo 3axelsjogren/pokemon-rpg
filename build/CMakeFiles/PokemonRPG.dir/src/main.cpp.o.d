@@ -786,4 +786,6 @@ CMakeFiles/PokemonRPG.dir/src/main.cpp.o: \
   /Users/axel/dev/pokemon-rpg/src/Constants.h \
   /Users/axel/dev/pokemon-rpg/src/NPC.h \
   /Users/axel/dev/pokemon-rpg/src/Player.h \
-  /Users/axel/dev/pokemon-rpg/src/DialogBox.h
+  /Users/axel/dev/pokemon-rpg/src/DialogBox.h \
+  /Users/axel/dev/pokemon-rpg/src/BattleManager.h \
+  /Users/axel/dev/pokemon-rpg/src/Enemy.h

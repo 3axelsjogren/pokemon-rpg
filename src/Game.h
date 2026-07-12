@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "DialogBox.h"
 #include "Constants.h"
+#include "BattleManager.h"
 #include <memory>
 
 class Game {
@@ -25,6 +26,9 @@ private:
     DialogBox m_dialog;
 
     GameState m_state;
+
+    BattleManager m_battle;
+    bool m_inBossRoom = false;
 
     Music m_musicOverworld;
     Music m_musicCave;

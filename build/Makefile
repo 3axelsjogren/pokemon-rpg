@@ -129,6 +129,30 @@ PokemonRPG/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PokemonRPG.dir/build.make CMakeFiles/PokemonRPG.dir/build
 .PHONY : PokemonRPG/fast
 
+src/BattleManager.o: src/BattleManager.cpp.o
+.PHONY : src/BattleManager.o
+
+# target to build an object file
+src/BattleManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PokemonRPG.dir/build.make CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.o
+.PHONY : src/BattleManager.cpp.o
+
+src/BattleManager.i: src/BattleManager.cpp.i
+.PHONY : src/BattleManager.i
+
+# target to preprocess a source file
+src/BattleManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PokemonRPG.dir/build.make CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.i
+.PHONY : src/BattleManager.cpp.i
+
+src/BattleManager.s: src/BattleManager.cpp.s
+.PHONY : src/BattleManager.s
+
+# target to generate assembly for a file
+src/BattleManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PokemonRPG.dir/build.make CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.s
+.PHONY : src/BattleManager.cpp.s
+
 src/DialogBox.o: src/DialogBox.cpp.o
 .PHONY : src/DialogBox.o
 
@@ -152,6 +176,30 @@ src/DialogBox.s: src/DialogBox.cpp.s
 src/DialogBox.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PokemonRPG.dir/build.make CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.s
 .PHONY : src/DialogBox.cpp.s
+
+src/Enemy.o: src/Enemy.cpp.o
+.PHONY : src/Enemy.o
+
+# target to build an object file
+src/Enemy.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PokemonRPG.dir/build.make CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.o
+.PHONY : src/Enemy.cpp.o
+
+src/Enemy.i: src/Enemy.cpp.i
+.PHONY : src/Enemy.i
+
+# target to preprocess a source file
+src/Enemy.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PokemonRPG.dir/build.make CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.i
+.PHONY : src/Enemy.cpp.i
+
+src/Enemy.s: src/Enemy.cpp.s
+.PHONY : src/Enemy.s
+
+# target to generate assembly for a file
+src/Enemy.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PokemonRPG.dir/build.make CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.s
+.PHONY : src/Enemy.cpp.s
 
 src/Game.o: src/Game.cpp.o
 .PHONY : src/Game.o
@@ -306,9 +354,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... PokemonRPG"
+	@echo "... src/BattleManager.o"
+	@echo "... src/BattleManager.i"
+	@echo "... src/BattleManager.s"
 	@echo "... src/DialogBox.o"
 	@echo "... src/DialogBox.i"
 	@echo "... src/DialogBox.s"
+	@echo "... src/Enemy.o"
+	@echo "... src/Enemy.i"
+	@echo "... src/Enemy.s"
 	@echo "... src/Game.o"
 	@echo "... src/Game.i"
 	@echo "... src/Game.s"

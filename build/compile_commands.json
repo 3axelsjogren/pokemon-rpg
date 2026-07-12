@@ -1,9 +1,21 @@
 [
 {
   "directory": "/Users/axel/dev/pokemon-rpg/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.o -c /Users/axel/dev/pokemon-rpg/src/BattleManager.cpp",
+  "file": "/Users/axel/dev/pokemon-rpg/src/BattleManager.cpp",
+  "output": "CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.o"
+},
+{
+  "directory": "/Users/axel/dev/pokemon-rpg/build",
   "command": "/usr/bin/clang++  -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.o -c /Users/axel/dev/pokemon-rpg/src/DialogBox.cpp",
   "file": "/Users/axel/dev/pokemon-rpg/src/DialogBox.cpp",
   "output": "CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.o"
+},
+{
+  "directory": "/Users/axel/dev/pokemon-rpg/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.o -c /Users/axel/dev/pokemon-rpg/src/Enemy.cpp",
+  "file": "/Users/axel/dev/pokemon-rpg/src/Enemy.cpp",
+  "output": "CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.o"
 },
 {
   "directory": "/Users/axel/dev/pokemon-rpg/build",

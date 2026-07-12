@@ -114,6 +114,38 @@ void Game::Update(float dt){
         }
     }
 
+    // Boss-rum
+    if (m_mapManager->GetCurrentMapName() == "boss_room") {
+        if (!m_inBossRoom) {
+            m_inBossRoom = true;
+            m_battle.SpawnBoss(10 * TILE_SIZE, 9 * TILE_SIZE);
+        }
+        bool attack = IsKeyPressed(KEY_SPACE);
+        m_battle.Update(dt, m_player->GetPosition(), attack, *map);
+
+        if (m_mapManager->GetCurrentMapName() == "boss_room") {
+    if (!m_inBossRoom) {
+        m_inBossRoom = true;
+        m_battle.SpawnBoss(10 * TILE_SIZE, 9 * TILE_SIZE);
+    }
+    bool attack = IsKeyPressed(KEY_SPACE);
+    m_battle.Update(dt, m_player->GetPosition(), attack, *map);
+
+    // Spelare dör
+    if (m_battle.GetPlayerHP() <= 0) {
+        m_inBossRoom = false;
+        m_battle.Reset();
+        m_mapManager->SwitchMap("corridor_1");
+        m_player->SetPosition(7 * TILE_SIZE, 19 * TILE_SIZE);
+        m_camera.target = m_player->GetCenter();
+        m_dialog.Show("!", "You were defeated... Try again.");
+    }
+}
+
+    } else {
+        m_inBossRoom = false;
+    }
+
     // Musikbyte
     std::string mapName = m_mapManager->GetCurrentMapName();
     Music newMusic;
@@ -191,8 +223,12 @@ void Game::Draw(){
     m_mapManager->GetCurrentMap()->Draw(m_camera);
     for (auto &npc : m_mapManager->GetNPCs())
         npc.Draw();
+    if (m_mapManager->GetCurrentMapName() == "boss_room")
+        m_battle.Draw();
     m_player->Draw();
     EndMode2D();
+    if (m_mapManager->GetCurrentMapName() == "boss_room")
+        m_battle.DrawHUD();
     m_dialog.Draw();
     DrawHUD();
     EndDrawing();

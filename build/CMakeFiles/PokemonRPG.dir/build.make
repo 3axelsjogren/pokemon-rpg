@@ -72,10 +72,24 @@ include CMakeFiles/PokemonRPG.dir/flags.make
 CMakeFiles/PokemonRPG.dir/codegen:
 .PHONY : CMakeFiles/PokemonRPG.dir/codegen
 
+CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.o: CMakeFiles/PokemonRPG.dir/flags.make
+CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.o: /Users/axel/dev/pokemon-rpg/src/BattleManager.cpp
+CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.o: CMakeFiles/PokemonRPG.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.o -MF CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.o.d -o CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.o -c /Users/axel/dev/pokemon-rpg/src/BattleManager.cpp
+
+CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/axel/dev/pokemon-rpg/src/BattleManager.cpp > CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.i
+
+CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/axel/dev/pokemon-rpg/src/BattleManager.cpp -o CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.s
+
 CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.o: CMakeFiles/PokemonRPG.dir/flags.make
 CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.o: /Users/axel/dev/pokemon-rpg/src/DialogBox.cpp
 CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.o: CMakeFiles/PokemonRPG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.o -MF CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.o.d -o CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.o -c /Users/axel/dev/pokemon-rpg/src/DialogBox.cpp
 
 CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.i: cmake_force
@@ -86,10 +100,24 @@ CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/axel/dev/pokemon-rpg/src/DialogBox.cpp -o CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.s
 
+CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.o: CMakeFiles/PokemonRPG.dir/flags.make
+CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.o: /Users/axel/dev/pokemon-rpg/src/Enemy.cpp
+CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.o: CMakeFiles/PokemonRPG.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.o -MF CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.o.d -o CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.o -c /Users/axel/dev/pokemon-rpg/src/Enemy.cpp
+
+CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/axel/dev/pokemon-rpg/src/Enemy.cpp > CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.i
+
+CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/axel/dev/pokemon-rpg/src/Enemy.cpp -o CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.s
+
 CMakeFiles/PokemonRPG.dir/src/Game.cpp.o: CMakeFiles/PokemonRPG.dir/flags.make
 CMakeFiles/PokemonRPG.dir/src/Game.cpp.o: /Users/axel/dev/pokemon-rpg/src/Game.cpp
 CMakeFiles/PokemonRPG.dir/src/Game.cpp.o: CMakeFiles/PokemonRPG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/PokemonRPG.dir/src/Game.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/PokemonRPG.dir/src/Game.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PokemonRPG.dir/src/Game.cpp.o -MF CMakeFiles/PokemonRPG.dir/src/Game.cpp.o.d -o CMakeFiles/PokemonRPG.dir/src/Game.cpp.o -c /Users/axel/dev/pokemon-rpg/src/Game.cpp
 
 CMakeFiles/PokemonRPG.dir/src/Game.cpp.i: cmake_force
@@ -103,7 +131,7 @@ CMakeFiles/PokemonRPG.dir/src/Game.cpp.s: cmake_force
 CMakeFiles/PokemonRPG.dir/src/MapManager.cpp.o: CMakeFiles/PokemonRPG.dir/flags.make
 CMakeFiles/PokemonRPG.dir/src/MapManager.cpp.o: /Users/axel/dev/pokemon-rpg/src/MapManager.cpp
 CMakeFiles/PokemonRPG.dir/src/MapManager.cpp.o: CMakeFiles/PokemonRPG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/PokemonRPG.dir/src/MapManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/PokemonRPG.dir/src/MapManager.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PokemonRPG.dir/src/MapManager.cpp.o -MF CMakeFiles/PokemonRPG.dir/src/MapManager.cpp.o.d -o CMakeFiles/PokemonRPG.dir/src/MapManager.cpp.o -c /Users/axel/dev/pokemon-rpg/src/MapManager.cpp
 
 CMakeFiles/PokemonRPG.dir/src/MapManager.cpp.i: cmake_force
@@ -117,7 +145,7 @@ CMakeFiles/PokemonRPG.dir/src/MapManager.cpp.s: cmake_force
 CMakeFiles/PokemonRPG.dir/src/NPC.cpp.o: CMakeFiles/PokemonRPG.dir/flags.make
 CMakeFiles/PokemonRPG.dir/src/NPC.cpp.o: /Users/axel/dev/pokemon-rpg/src/NPC.cpp
 CMakeFiles/PokemonRPG.dir/src/NPC.cpp.o: CMakeFiles/PokemonRPG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/PokemonRPG.dir/src/NPC.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/PokemonRPG.dir/src/NPC.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PokemonRPG.dir/src/NPC.cpp.o -MF CMakeFiles/PokemonRPG.dir/src/NPC.cpp.o.d -o CMakeFiles/PokemonRPG.dir/src/NPC.cpp.o -c /Users/axel/dev/pokemon-rpg/src/NPC.cpp
 
 CMakeFiles/PokemonRPG.dir/src/NPC.cpp.i: cmake_force
@@ -131,7 +159,7 @@ CMakeFiles/PokemonRPG.dir/src/NPC.cpp.s: cmake_force
 CMakeFiles/PokemonRPG.dir/src/Player.cpp.o: CMakeFiles/PokemonRPG.dir/flags.make
 CMakeFiles/PokemonRPG.dir/src/Player.cpp.o: /Users/axel/dev/pokemon-rpg/src/Player.cpp
 CMakeFiles/PokemonRPG.dir/src/Player.cpp.o: CMakeFiles/PokemonRPG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/PokemonRPG.dir/src/Player.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/PokemonRPG.dir/src/Player.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PokemonRPG.dir/src/Player.cpp.o -MF CMakeFiles/PokemonRPG.dir/src/Player.cpp.o.d -o CMakeFiles/PokemonRPG.dir/src/Player.cpp.o -c /Users/axel/dev/pokemon-rpg/src/Player.cpp
 
 CMakeFiles/PokemonRPG.dir/src/Player.cpp.i: cmake_force
@@ -145,7 +173,7 @@ CMakeFiles/PokemonRPG.dir/src/Player.cpp.s: cmake_force
 CMakeFiles/PokemonRPG.dir/src/TileMap.cpp.o: CMakeFiles/PokemonRPG.dir/flags.make
 CMakeFiles/PokemonRPG.dir/src/TileMap.cpp.o: /Users/axel/dev/pokemon-rpg/src/TileMap.cpp
 CMakeFiles/PokemonRPG.dir/src/TileMap.cpp.o: CMakeFiles/PokemonRPG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/PokemonRPG.dir/src/TileMap.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/PokemonRPG.dir/src/TileMap.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PokemonRPG.dir/src/TileMap.cpp.o -MF CMakeFiles/PokemonRPG.dir/src/TileMap.cpp.o.d -o CMakeFiles/PokemonRPG.dir/src/TileMap.cpp.o -c /Users/axel/dev/pokemon-rpg/src/TileMap.cpp
 
 CMakeFiles/PokemonRPG.dir/src/TileMap.cpp.i: cmake_force
@@ -159,7 +187,7 @@ CMakeFiles/PokemonRPG.dir/src/TileMap.cpp.s: cmake_force
 CMakeFiles/PokemonRPG.dir/src/main.cpp.o: CMakeFiles/PokemonRPG.dir/flags.make
 CMakeFiles/PokemonRPG.dir/src/main.cpp.o: /Users/axel/dev/pokemon-rpg/src/main.cpp
 CMakeFiles/PokemonRPG.dir/src/main.cpp.o: CMakeFiles/PokemonRPG.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/PokemonRPG.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/PokemonRPG.dir/src/main.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PokemonRPG.dir/src/main.cpp.o -MF CMakeFiles/PokemonRPG.dir/src/main.cpp.o.d -o CMakeFiles/PokemonRPG.dir/src/main.cpp.o -c /Users/axel/dev/pokemon-rpg/src/main.cpp
 
 CMakeFiles/PokemonRPG.dir/src/main.cpp.i: cmake_force
@@ -172,7 +200,9 @@ CMakeFiles/PokemonRPG.dir/src/main.cpp.s: cmake_force
 
 # Object files for target PokemonRPG
 PokemonRPG_OBJECTS = \
+"CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.o" \
 "CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.o" \
+"CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.o" \
 "CMakeFiles/PokemonRPG.dir/src/Game.cpp.o" \
 "CMakeFiles/PokemonRPG.dir/src/MapManager.cpp.o" \
 "CMakeFiles/PokemonRPG.dir/src/NPC.cpp.o" \
@@ -183,7 +213,9 @@ PokemonRPG_OBJECTS = \
 # External object files for target PokemonRPG
 PokemonRPG_EXTERNAL_OBJECTS =
 
+PokemonRPG: CMakeFiles/PokemonRPG.dir/src/BattleManager.cpp.o
 PokemonRPG: CMakeFiles/PokemonRPG.dir/src/DialogBox.cpp.o
+PokemonRPG: CMakeFiles/PokemonRPG.dir/src/Enemy.cpp.o
 PokemonRPG: CMakeFiles/PokemonRPG.dir/src/Game.cpp.o
 PokemonRPG: CMakeFiles/PokemonRPG.dir/src/MapManager.cpp.o
 PokemonRPG: CMakeFiles/PokemonRPG.dir/src/NPC.cpp.o
@@ -193,7 +225,7 @@ PokemonRPG: CMakeFiles/PokemonRPG.dir/src/main.cpp.o
 PokemonRPG: CMakeFiles/PokemonRPG.dir/build.make
 PokemonRPG: /opt/homebrew/lib/libraylib.dylib
 PokemonRPG: CMakeFiles/PokemonRPG.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable PokemonRPG"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/axel/dev/pokemon-rpg/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable PokemonRPG"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/PokemonRPG.dir/link.txt --verbose=$(VERBOSE)
 	/opt/homebrew/bin/cmake -E copy_directory /Users/axel/dev/pokemon-rpg/assets /Users/axel/dev/pokemon-rpg/build/assets
 
