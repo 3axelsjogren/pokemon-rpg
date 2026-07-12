@@ -36,6 +36,7 @@ private:
     Music m_musicPuzzle1;
     Music m_musicCorridor;
     Music m_musicBoss1;
+    Music m_musicVictory;
 
     Music m_musicCurrent;
 };

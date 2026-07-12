@@ -9,6 +9,8 @@ struct SpriteConfig {
 
 struct GameState {
     bool hasGem = false;
+    bool hasGem2 = false;
+    bool bossDefeated = false;
     float puzzleTimer = 0.0f;
     bool puzzleActive = false;
 };

@@ -7,7 +7,7 @@ BattleManager::BattleManager()
 
 void BattleManager::SpawnBoss(float x, float y) {
     m_enemies.clear();
-    m_enemies.push_back(Enemy(x, y, 300, 30.0f, { 80, 20, 20, 255 })); // hp, första parameter, speed, andra parameter 
+    m_enemies.push_back(Enemy(x, y, 300, 45.0f, { 80, 20, 20, 255 })); // hp, första parameter, speed, andra parameter 
 }
 
 void BattleManager::Update(float dt, Vector2 playerPos, bool playerAttacks, const TileMap& map) {

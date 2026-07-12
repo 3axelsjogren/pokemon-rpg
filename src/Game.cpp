@@ -28,6 +28,9 @@ Game::Game(){
     m_musicBoss1 = LoadMusicStream("assets/music/boss1.ogg");
     SetMusicVolume(m_musicBoss1, 0.4f);
 
+    m_musicVictory = LoadMusicStream("assets/music/victory.ogg");
+    SetMusicVolume(m_musicVictory, 0.4f);
+
     m_musicCurrent = m_musicOverworld;
     PlayMusicStream(m_musicCurrent);
 
@@ -50,6 +53,7 @@ Game::~Game(){
     UnloadMusicStream(m_musicPuzzle1);
     UnloadMusicStream(m_musicCorridor);
     UnloadMusicStream(m_musicBoss1);
+    UnloadMusicStream(m_musicVictory);
     CloseAudioDevice();
 }
 
@@ -66,15 +70,12 @@ void Game::Update(float dt){
     m_player->Update(dt, *map);
 
     if (m_mapManager->GetCurrentMapName() == "temple_puzzle"){
-
         if (!m_state.puzzleActive){
             m_state.puzzleActive = true;
-            m_state.puzzleTimer = 30.0f; // 30 sekunder
+            m_state.puzzleTimer = 30.0f;
         }
-
         m_state.puzzleTimer -= dt;
 
-        // Reset om tiden är ute
         if (m_state.puzzleTimer <= 0.0f){
             m_state.puzzleActive = false;
             m_mapManager->SwitchMap("temple_out");
@@ -89,7 +90,7 @@ void Game::Update(float dt){
         TileType tile = map->GetTileType(tileX, tileY);
 
         if (tile != TILE_CAVE_FLOOR && tile != TILE_DOOR && tile != TILE_CAVE_WALL){
-            m_state.puzzleTimer = 30.0f; // reset timer vid lava
+            m_state.puzzleTimer = 30.0f;
             m_player->SetPosition(4 * TILE_SIZE, 17 * TILE_SIZE);
         }
     }
@@ -101,13 +102,11 @@ void Game::Update(float dt){
     if (m_mapManager->CheckDoorTrigger(center.x, center.y, spawnX, spawnY, targetMap)){
         if (targetMap == "blockage" && m_state.hasGem) targetMap = "blockage_unlocked";
 
-        m_state.hasGem = true; // tillfällig under utveckling ----------------- MISSA INTE
+        m_state.hasGem = true; // tillfällig under utveckling --- MISSA INTE
         if (targetMap == "temple_puzzle" && !m_state.hasGem){
             m_dialog.Show("!", "The temple is sealed. You need the crystal.");
-        }
-        else{
+        } else {
             if (targetMap != "temple_puzzle") m_state.puzzleActive = false;
-
             m_mapManager->SwitchMap(targetMap);
             m_player->SetPosition(spawnX, spawnY);
             m_camera.target = m_player->GetCenter();
@@ -115,33 +114,32 @@ void Game::Update(float dt){
     }
 
     // Boss-rum
-    if (m_mapManager->GetCurrentMapName() == "boss_room") {
-        if (!m_inBossRoom) {
+    if (m_mapManager->GetCurrentMapName() == "boss_room"){
+        if (!m_inBossRoom && !m_state.bossDefeated){
             m_inBossRoom = true;
             m_battle.SpawnBoss(10 * TILE_SIZE, 9 * TILE_SIZE);
         }
-        bool attack = IsKeyPressed(KEY_SPACE);
-        m_battle.Update(dt, m_player->GetPosition(), attack, *map);
 
-        if (m_mapManager->GetCurrentMapName() == "boss_room") {
-    if (!m_inBossRoom) {
-        m_inBossRoom = true;
-        m_battle.SpawnBoss(10 * TILE_SIZE, 9 * TILE_SIZE);
-    }
-    bool attack = IsKeyPressed(KEY_SPACE);
-    m_battle.Update(dt, m_player->GetPosition(), attack, *map);
+        if (!m_state.bossDefeated){
+            bool attack = IsKeyPressed(KEY_SPACE);
+            m_battle.Update(dt, m_player->GetPosition(), attack, *map);
 
-    // Spelare dör
-    if (m_battle.GetPlayerHP() <= 0) {
-        m_inBossRoom = false;
-        m_battle.Reset();
-        m_mapManager->SwitchMap("corridor_1");
-        m_player->SetPosition(7 * TILE_SIZE, 19 * TILE_SIZE);
-        m_camera.target = m_player->GetCenter();
-        m_dialog.Show("!", "You were defeated... Try again.");
-    }
-}
+            if (!m_battle.IsBossAlive()){
+                m_inBossRoom = false;
+                m_state.bossDefeated = true;
+                m_state.hasGem2 = true;
+                m_dialog.Show("!", "The ancient guardian falls... A second crystal appears!");
+            }
 
+            if (m_battle.GetPlayerHP() <= 0){
+                m_inBossRoom = false;
+                m_battle.Reset();
+                m_mapManager->SwitchMap("corridor_1");
+                m_player->SetPosition(7 * TILE_SIZE, 19 * TILE_SIZE);
+                m_camera.target = m_player->GetCenter();
+                m_dialog.Show("!", "You were defeated... Try again.");
+            }
+        }
     } else {
         m_inBossRoom = false;
     }
@@ -149,31 +147,26 @@ void Game::Update(float dt){
     // Musikbyte
     std::string mapName = m_mapManager->GetCurrentMapName();
     Music newMusic;
-    if (mapName == "q1_cave" || mapName == "q1_cave_no_gem") {
-            newMusic = m_musicCave;
-        }
-    else if (mapName == "temple_puzzle"){
+    if (mapName == "q1_cave" || mapName == "q1_cave_no_gem")
+        newMusic = m_musicCave;
+    else if (mapName == "temple_puzzle")
         newMusic = m_musicPuzzle1;
-    }
-    else if (mapName == "corridor_1"){
+    else if (mapName == "corridor_1")
         newMusic = m_musicCorridor;
-    }
-    else if(mapName == "boss_room"){
-        newMusic = m_musicBoss1;
-    }  
+    else if (mapName == "boss_room")
+        newMusic = m_battle.IsBossAlive() ? m_musicBoss1 : m_musicVictory;
     else if (mapName == "first_city" || mapName == "apartament_1" ||
-            mapName == "apartament_2" || mapName == "apartament_3" ||
-            mapName == "apartament_4" || mapName == "apartament_5")
+             mapName == "apartament_2" || mapName == "apartament_3" ||
+             mapName == "apartament_4" || mapName == "apartament_5")
         newMusic = m_musicCity;
     else
         newMusic = m_musicOverworld;
 
-    if (newMusic.stream.buffer != m_musicCurrent.stream.buffer) {
+    if (newMusic.stream.buffer != m_musicCurrent.stream.buffer){
         StopMusicStream(m_musicCurrent);
         m_musicCurrent = newMusic;
         PlayMusicStream(m_musicCurrent);
     }
-
     UpdateMusicStream(m_musicCurrent);
 
     // Plocka upp kristall
@@ -196,8 +189,7 @@ void Game::Update(float dt){
     if (IsKeyPressed(KEY_E)){
         if (m_dialog.IsOpen()){
             m_dialog.Close();
-        }
-        else{
+        } else {
             Vector2 pos = m_player->GetPosition();
             NPC *closest = nullptr;
             float closestDist = FLT_MAX;
@@ -241,5 +233,9 @@ void Game::DrawHUD(){
     if (m_mapManager->GetCurrentMapName() == "temple_puzzle"){
         std::string timerText = "Time: " + std::to_string((int)m_state.puzzleTimer);
         DrawText(timerText.c_str(), SCREEN_WIDTH / 2 - 40, 10, 24, YELLOW);
+    }
+
+    if (m_mapManager->GetCurrentMapName() == "boss_room") {
+        DrawText("SPACE - Attack", SCREEN_WIDTH - 150, SCREEN_HEIGHT - 24, 16, LIGHTGRAY);
     }
 }
