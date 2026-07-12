@@ -19,7 +19,7 @@ Game::Game(){
 
     m_mapManager = std::make_unique<MapManager>();
 
-    m_player = std::make_unique<Player>(3 * TILE_SIZE, 17 * TILE_SIZE); // spawn
+    m_player = std::make_unique<Player>(3 * TILE_SIZE, 4 * TILE_SIZE); // spawn
 
     m_camera = {};
     m_camera.zoom = 1.5f;
@@ -83,7 +83,7 @@ void Game::Update(float dt){
     if (m_mapManager->CheckDoorTrigger(center.x, center.y, spawnX, spawnY, targetMap)){
         if (targetMap == "blockage" && m_state.hasGem) targetMap = "blockage_unlocked";
 
-        m_state.hasGem = true; // tillfällig under utveckling ----------------- MISSA INTE
+        //m_state.hasGem = true; // tillfällig under utveckling ----------------- MISSA INTE
         if (targetMap == "temple_puzzle" && !m_state.hasGem){
             m_dialog.Show("!", "The temple is sealed. You need the crystal.");
         }

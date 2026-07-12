@@ -304,6 +304,31 @@ static const std::vector<std::vector<int>> TEMPLE_PUZZLE = {
     { 10, 10, 10,  6, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 },
 };
 
+static const std::vector<std::vector<int>> CORRIDOR_1 = {
+    {13, 10, 10,  6,  6,  6, 10, 10, 13},
+    {10, 11, 11, 11, 11, 11, 11, 11, 10},
+    {10, 11, 11, 11, 11, 11, 11, 11, 10},
+    {10, 11, 11, 11, 11, 11, 11, 11, 10},
+    {13, 10, 11, 11, 11, 11, 11, 10, 13},
+    {13, 13, 10, 11, 11, 11, 10, 13, 13},
+    {13, 13, 10, 11, 11, 11, 10, 13, 13},
+    {13, 13, 10, 11, 11, 11, 10, 13, 13},
+    {13, 13, 10, 11, 11, 11, 10, 13, 13},
+    {13, 13, 10, 11, 11, 11, 10, 13, 13},
+    {13, 13, 10, 11, 11, 11, 10, 13, 13},
+    {13, 13, 10, 11, 11, 11, 10, 13, 13},
+    {13, 13, 10, 11, 11, 11, 10, 13, 13},
+    {13, 13, 10, 11, 11, 11, 10, 13, 13},
+    {13, 13, 10, 11, 11, 11, 10, 13, 13},
+    {13, 13, 10, 11, 11, 11, 10, 13, 13},
+    {13, 13, 10, 11, 11, 11, 10, 13, 13},
+    {13, 13, 10, 11, 11, 11, 11, 10, 13},
+    {13, 13, 13, 10, 11, 11, 11, 11, 10},
+    {13, 13, 13, 13, 10, 11, 11, 11,  6},
+    {13, 13, 13, 13, 13, 10, 11, 11,  6},
+    {13, 13, 13, 13, 13, 13, 10, 10, 10},
+};
+
 MapManager::MapManager() {
     RegisterMaps();
     //SwitchMap("outdoor"); // start av spelet
@@ -311,8 +336,9 @@ MapManager::MapManager() {
     //SwitchMap("blockage_unlocked"); // ingång till city efter quest1
     //SwitchMap("first_city"); // start av city
     //SwitchMap("woods2");
-    SwitchMap("temple_out");
+    //SwitchMap("temple_out");
     //SwitchMap("temple_puzzle");
+    SwitchMap("corridor_1");
 }
 
 void MapManager::RegisterMaps() {
@@ -434,6 +460,15 @@ void MapManager::RegisterTemple(){
     m_doors["temple_out"].push_back({9, 11, "temple_puzzle", 3 * TILE_SIZE, 18 * TILE_SIZE });
     m_doors["temple_out"].push_back({10, 11, "temple_puzzle", 3 * TILE_SIZE, 18 * TILE_SIZE });
     m_doors["temple_puzzle"].push_back({3, 19, "temple_out", 9 * TILE_SIZE, 12 * TILE_SIZE });
+
+    m_mapData["corridor_1"] = CORRIDOR_1;
+
+    m_doors["temple_puzzle"].push_back({0, 13, "corridor_1", 7 * TILE_SIZE, 19 * TILE_SIZE });
+    m_doors["temple_puzzle"].push_back({0, 14, "corridor_1", 7 * TILE_SIZE, 20 * TILE_SIZE });
+
+    // Tillbaka ut
+    m_doors["corridor_1"].push_back({8, 19, "temple_out", 9 * TILE_SIZE, 13 * TILE_SIZE });
+    m_doors["corridor_1"].push_back({8, 20, "temple_out", 10 * TILE_SIZE, 13 * TILE_SIZE });
 }
 
 void MapManager::SwitchMap(const std::string& mapName) {
