@@ -11,9 +11,23 @@ Game::Game(){
 
     InitAudioDevice();
     m_musicOverworld = LoadMusicStream("assets/music/main_theme.ogg");
+    SetMusicVolume(m_musicOverworld, 0.1f); // 0.0 = tyst, 1.0 = max
+
     m_musicCave = LoadMusicStream("assets/music/cave.ogg");
-    SetMusicVolume(m_musicOverworld, 0.0f); // 0.0 = tyst, 1.0 = max
     SetMusicVolume(m_musicCave, 0.1f);
+
+    m_musicCity = LoadMusicStream("assets/music/city1.ogg");
+    SetMusicVolume(m_musicCity, 0.1f);
+
+    m_musicPuzzle1 = LoadMusicStream("assets/music/puzzle1.ogg");
+    SetMusicVolume(m_musicPuzzle1, 0.1f);
+
+    m_musicCorridor = LoadMusicStream("assets/music/corridor.ogg");
+    SetMusicVolume(m_musicCorridor, 0.5f);
+
+    m_musicBoss1 = LoadMusicStream("assets/music/boss1.ogg");
+    SetMusicVolume(m_musicBoss1, 0.4f);
+
     m_musicCurrent = m_musicOverworld;
     PlayMusicStream(m_musicCurrent);
 
@@ -32,6 +46,10 @@ Game::~Game(){
     CloseWindow();
     UnloadMusicStream(m_musicOverworld);
     UnloadMusicStream(m_musicCave);
+    UnloadMusicStream(m_musicCity);
+    UnloadMusicStream(m_musicPuzzle1);
+    UnloadMusicStream(m_musicCorridor);
+    UnloadMusicStream(m_musicBoss1);
     CloseAudioDevice();
 }
 
@@ -83,7 +101,7 @@ void Game::Update(float dt){
     if (m_mapManager->CheckDoorTrigger(center.x, center.y, spawnX, spawnY, targetMap)){
         if (targetMap == "blockage" && m_state.hasGem) targetMap = "blockage_unlocked";
 
-        //m_state.hasGem = true; // tillfällig under utveckling ----------------- MISSA INTE
+        m_state.hasGem = true; // tillfällig under utveckling ----------------- MISSA INTE
         if (targetMap == "temple_puzzle" && !m_state.hasGem){
             m_dialog.Show("!", "The temple is sealed. You need the crystal.");
         }
@@ -98,10 +116,27 @@ void Game::Update(float dt){
 
     // Musikbyte
     std::string mapName = m_mapManager->GetCurrentMapName();
-    Music newMusic = (mapName == "q1_cave" || mapName == "q1_cave_no_gem")
-        ? m_musicCave : m_musicOverworld;
+    Music newMusic;
+    if (mapName == "q1_cave" || mapName == "q1_cave_no_gem") {
+            newMusic = m_musicCave;
+        }
+    else if (mapName == "temple_puzzle"){
+        newMusic = m_musicPuzzle1;
+    }
+    else if (mapName == "corridor_1"){
+        newMusic = m_musicCorridor;
+    }
+    else if(mapName == "boss_room"){
+        newMusic = m_musicBoss1;
+    }  
+    else if (mapName == "first_city" || mapName == "apartament_1" ||
+            mapName == "apartament_2" || mapName == "apartament_3" ||
+            mapName == "apartament_4" || mapName == "apartament_5")
+        newMusic = m_musicCity;
+    else
+        newMusic = m_musicOverworld;
 
-    if (newMusic.stream.buffer != m_musicCurrent.stream.buffer){
+    if (newMusic.stream.buffer != m_musicCurrent.stream.buffer) {
         StopMusicStream(m_musicCurrent);
         m_musicCurrent = newMusic;
         PlayMusicStream(m_musicCurrent);

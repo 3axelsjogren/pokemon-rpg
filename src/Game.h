@@ -28,5 +28,10 @@ private:
 
     Music m_musicOverworld;
     Music m_musicCave;
+    Music m_musicCity;
+    Music m_musicPuzzle1;
+    Music m_musicCorridor;
+    Music m_musicBoss1;
+
     Music m_musicCurrent;
 };
