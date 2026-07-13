@@ -20,7 +20,13 @@ public:
 
     bool IsBossAlive() const;
     bool PlayerTookDamage() const { return m_playerTookDamage; }
+    bool m_attackLanded = false;
+    bool AttackLanded() const { return m_attackLanded; }
+    void ResetAttackFlag() { m_attackLanded = false; }
     void ResetDamageFlag() { m_playerTookDamage = false; }
+    bool m_pickupCollected = false;
+    bool PickupCollected() const { return m_pickupCollected; }
+    void ResetPickupFlag() { m_pickupCollected = false; }
     void Reset();
 
     int GetPlayerHP() const { return m_playerHp; }

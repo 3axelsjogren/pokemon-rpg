@@ -33,6 +33,7 @@ void BattleManager::Update(float dt, Vector2 playerPos, bool playerAttacks, cons
         if (sqrtf(dx*dx + dy*dy) < TILE_SIZE) {
             pickup.active = false;
             m_playerHp = std::min(m_playerHp + 30, m_playerMaxHp);
+            m_pickupCollected = true;
         }
     }
 
@@ -51,6 +52,7 @@ void BattleManager::Update(float dt, Vector2 playerPos, bool playerAttacks, cons
         if ((playerAttacks && m_playerAttackCooldown <= 0.0f && enemy.IsAlive() && enemy.IsInAttackRange(playerPos))) {
             enemy.TakeDamage(10);
             m_playerAttackCooldown = 1.0f;
+            m_attackLanded = true;
         }
     }
 }
@@ -97,6 +99,8 @@ void BattleManager::Reset() {
     m_playerTookDamage = false;
     m_damageCooldown = 0.0f;
     m_playerAttackCooldown = 0.0f;
+    m_attackLanded = false;
+    m_pickupCollected = false;
     
     m_pickups.clear();
     m_pickupSpawnTimer = 0.0f;

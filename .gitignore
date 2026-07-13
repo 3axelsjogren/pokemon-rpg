@@ -4,3 +4,9 @@ cmake-build-release/
 *.o
 *.a
 .vscode/
+
+build-release/
+pokemon-rpg-mac.zip
+pokemon-rpg-mac/
+PokemonRPG.app/
+*.DS_Store

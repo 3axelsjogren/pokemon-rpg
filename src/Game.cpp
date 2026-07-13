@@ -10,6 +10,8 @@ Game::Game(){
     SetTargetFPS(TARGET_FPS);
 
     InitAudioDevice();
+
+    //musik
     m_musicOverworld = LoadMusicStream("assets/music/main_theme.ogg");
     SetMusicVolume(m_musicOverworld, 0.1f); // 0.0 = tyst, 1.0 = max
 
@@ -34,9 +36,16 @@ Game::Game(){
     m_musicCurrent = m_musicOverworld;
     PlayMusicStream(m_musicCurrent);
 
+    // sfx
+    m_sfxAttack = LoadSound("assets/sfx/attack.ogg");
+    m_sfxHit = LoadSound("assets/sfx/hit.ogg");
+    m_sfxDoor = LoadSound("assets/sfx/door.ogg");
+    m_sfxPickup = LoadSound("assets/sfx/pickup.ogg");
+    SetSoundVolume(m_sfxPickup, 0.4f);
+
     m_mapManager = std::make_unique<MapManager>();
 
-    m_player = std::make_unique<Player>(8 * TILE_SIZE, 8 * TILE_SIZE); // spawn
+    m_player = std::make_unique<Player>(3 * TILE_SIZE, 8 * TILE_SIZE); // spawn
 
     m_camera = {};
     m_camera.zoom = 1.5f;
@@ -54,6 +63,11 @@ Game::~Game(){
     UnloadMusicStream(m_musicCorridor);
     UnloadMusicStream(m_musicBoss1);
     UnloadMusicStream(m_musicVictory);
+
+    UnloadSound(m_sfxAttack);
+    UnloadSound(m_sfxHit);
+    UnloadSound(m_sfxDoor);
+    UnloadSound(m_sfxPickup);
     CloseAudioDevice();
 }
 
@@ -100,6 +114,7 @@ void Game::Update(float dt){
     std::string targetMap;
     Vector2 center = m_player->GetCenter();
     if (m_mapManager->CheckDoorTrigger(center.x, center.y, spawnX, spawnY, targetMap)){
+        PlaySound(m_sfxDoor);
         if (targetMap == "blockage" && m_state.hasGem) targetMap = "blockage_unlocked";
 
         //m_state.hasGem = true; // tillfällig under utveckling --- MISSA INTE
@@ -122,7 +137,21 @@ void Game::Update(float dt){
 
         if (!m_state.bossDefeated){
             bool attack = IsKeyPressed(KEY_SPACE);
+            if (m_battle.AttackLanded()){
+                PlaySound(m_sfxAttack);
+                m_battle.ResetAttackFlag();
+            }
             m_battle.Update(dt, m_player->GetPosition(), attack, *map);
+
+            if (m_battle.PickupCollected()){
+                PlaySound(m_sfxPickup);
+                m_battle.ResetPickupFlag();
+            }
+
+            if (m_battle.PlayerTookDamage()){
+                PlaySound(m_sfxHit);
+                m_battle.ResetDamageFlag();
+            }
 
             if (!m_battle.IsBossAlive()){
                 m_inBossRoom = false;

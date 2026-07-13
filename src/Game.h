@@ -30,6 +30,7 @@ private:
     BattleManager m_battle;
     bool m_inBossRoom = false;
 
+    //musik
     Music m_musicOverworld;
     Music m_musicCave;
     Music m_musicCity;
@@ -39,4 +40,10 @@ private:
     Music m_musicVictory;
 
     Music m_musicCurrent;
+
+    //sfx
+    Sound m_sfxAttack;
+    Sound m_sfxHit;
+    Sound m_sfxDoor;
+    Sound m_sfxPickup;
 };
