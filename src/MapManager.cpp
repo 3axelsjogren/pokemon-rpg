@@ -354,14 +354,14 @@ static const std::vector<std::vector<int>> BOSS_ROOM = {
 
 MapManager::MapManager() {
     RegisterMaps();
-    SwitchMap("outdoor"); // start av spelet
+    //SwitchMap("outdoor"); // start av spelet
     //SwitchMap("blockage"); // quest1
     //SwitchMap("blockage_unlocked"); // ingång till city efter quest1
     //SwitchMap("first_city"); // start av city
     //SwitchMap("woods2");
     //SwitchMap("temple_out");
     //SwitchMap("temple_puzzle");
-    //SwitchMap("corridor_1");
+    SwitchMap("corridor_1");
 }
 
 void MapManager::RegisterMaps() {
