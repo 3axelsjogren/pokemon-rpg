@@ -40,12 +40,13 @@ Game::Game(){
     m_sfxAttack = LoadSound("assets/sfx/attack.ogg");
     m_sfxHit = LoadSound("assets/sfx/hit.ogg");
     m_sfxDoor = LoadSound("assets/sfx/door.ogg");
+    SetSoundVolume(m_sfxDoor, 0.4f);
     m_sfxPickup = LoadSound("assets/sfx/pickup.ogg");
     SetSoundVolume(m_sfxPickup, 0.4f);
 
     m_mapManager = std::make_unique<MapManager>();
 
-    m_player = std::make_unique<Player>(3 * TILE_SIZE, 8 * TILE_SIZE); // spawn
+    m_player = std::make_unique<Player>(6 * TILE_SIZE, 8 * TILE_SIZE); // spawn
 
     m_camera = {};
     m_camera.zoom = 1.5f;
@@ -213,6 +214,19 @@ void Game::Update(float dt){
     center = m_player->GetCenter();
     m_camera.target.x += (center.x - m_camera.target.x) * 8.0f * dt;
     m_camera.target.y += (center.y - m_camera.target.y) * 8.0f * dt;
+
+    // Kamera-begränsning
+    TileMap* currentMap = m_mapManager->GetCurrentMap();
+    float mapW = currentMap->GetWidth() * TILE_SIZE;
+    float mapH = currentMap->GetHeight() * TILE_SIZE;
+
+    float halfW = (SCREEN_WIDTH / 2.0f) / m_camera.zoom;
+    float halfH = (SCREEN_HEIGHT / 2.0f) / m_camera.zoom;
+
+    if (m_camera.target.x < halfW) m_camera.target.x = halfW;
+    if (m_camera.target.y < halfH) m_camera.target.y = halfH;
+    if (m_camera.target.x > mapW - halfW) m_camera.target.x = mapW - halfW;
+    if (m_camera.target.y > mapH - halfH) m_camera.target.y = mapH - halfH;
 
     // NPC-interaktion
     if (IsKeyPressed(KEY_E)){

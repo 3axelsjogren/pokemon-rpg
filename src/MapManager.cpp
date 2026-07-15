@@ -305,28 +305,28 @@ static const std::vector<std::vector<int>> TEMPLE_PUZZLE = {
 };
 
 static const std::vector<std::vector<int>> CORRIDOR_1 = {
-    {13, 10, 10,  6,  6,  6, 10, 10, 13},
-    {10, 11, 11, 11, 11, 11, 11, 11, 10},
-    {10, 11, 11, 11, 11, 11, 11, 11, 10},
-    {10, 11, 11, 11, 11, 11, 11, 11, 10},
-    {13, 10, 11, 11, 11, 11, 11, 10, 13},
-    {13, 13, 10, 11, 11, 11, 10, 13, 13},
-    {13, 13, 10, 11, 11, 11, 10, 13, 13},
-    {13, 13, 10, 11, 11, 11, 10, 13, 13},
-    {13, 13, 10, 11, 11, 11, 10, 13, 13},
-    {13, 13, 10, 11, 11, 11, 10, 13, 13},
-    {13, 13, 10, 11, 11, 11, 10, 13, 13},
-    {13, 13, 10, 11, 11, 11, 10, 13, 13},
-    {13, 13, 10, 11, 11, 11, 10, 13, 13},
-    {13, 13, 10, 11, 11, 11, 10, 13, 13},
-    {13, 13, 10, 11, 11, 11, 10, 13, 13},
-    {13, 13, 10, 11, 11, 11, 10, 13, 13},
-    {13, 13, 10, 11, 11, 11, 10, 13, 13},
-    {13, 13, 10, 11, 11, 11, 11, 10, 13},
-    {13, 13, 13, 10, 11, 11, 11, 11, 10},
-    {13, 13, 13, 13, 10, 11, 11, 11,  6},
-    {13, 13, 13, 13, 13, 10, 11, 11,  6},
-    {13, 13, 13, 13, 13, 13, 10, 10, 10},
+    {13,13,13,13,10,10, 6, 6, 6,10,10,13,13,13,13,13,13,13,13,13},
+    {13,13,13,10,11,11,11,11,11,11,11,10,13,13,13,13,13,13,13,13},
+    {13,13,13,10,11,11,11,11,11,11,11,10,13,13,13,13,13,13,13,13},
+    {13,13,13,10,11,11,11,11,11,11,11,10,13,13,13,13,13,13,13,13},
+    {13,13,13,13,10,11,11,11,11,11,10,13,13,13,13,13,13,13,13,13},
+    {13,13,13,13,13,10,11,11,11,10,13,13,13,13,13,13,13,13,13,13},
+    {13,13,13,13,13,10,11,11,11,10,13,13,13,13,13,13,13,13,13,13},
+    {13,13,13,13,13,10,11,11,11,10,13,13,13,13,13,13,13,13,13,13},
+    {13,13,13,13,13,10,11,11,11,10,13,13,13,13,13,13,13,13,13,13},
+    {13,13,13,13,13,10,11,11,11,10,13,13,13,13,13,13,13,13,13,13},
+    {13,13,13,13,13,10,11,11,11,10,13,13,13,13,13,13,13,13,13,13},
+    {13,13,13,13,13,10,11,11,11,10,13,13,13,13,13,13,13,13,13,13},
+    {13,13,13,13,13,10,11,11,11,10,13,13,13,13,13,13,13,13,13,13},
+    {13,13,13,13,13,10,11,11,11,10,13,13,13,13,13,13,13,13,13,13},
+    {13,13,13,13,13,10,11,11,11,10,13,13,13,13,13,13,13,13,13,13},
+    {13,13,13,13,13,10,11,11,11,10,13,13,13,13,13,13,13,13,13,13},
+    {13,13,13,13,13,10,11,11,11,10,13,13,13,13,13,13,13,13,13,13},
+    {13,13,13,13,13,10,11,11,11,11,10,10,10,10,13,13,13,13,13,13},
+    {13,13,13,13,13,10,11,11,11,11,11,11,11,10,13,13,13,13,13,13},
+    {13,13,13,13,13,13,10,11,11,11,11,11,11, 6,13,13,13,13,13,13},
+    {13,13,13,13,13,13,13,10,10,11,11,11,11, 6,13,13,13,13,13,13},
+    {13,13,13,13,13,13,13,13,13,10,10,10,10,10,13,13,13,13,13,13},
 };
 
 static const std::vector<std::vector<int>> BOSS_ROOM = {
@@ -354,14 +354,14 @@ static const std::vector<std::vector<int>> BOSS_ROOM = {
 
 MapManager::MapManager() {
     RegisterMaps();
-    SwitchMap("outdoor"); // start av spelet
+    //SwitchMap("outdoor"); // start av spelet
     //SwitchMap("blockage"); // quest1
     //SwitchMap("blockage_unlocked"); // ingång till city efter quest1
     //SwitchMap("first_city"); // start av city
     //SwitchMap("woods2");
     //SwitchMap("temple_out");
     //SwitchMap("temple_puzzle");
-    //SwitchMap("corridor_1");
+    SwitchMap("corridor_1");
 }
 
 void MapManager::RegisterMaps() {
@@ -485,22 +485,21 @@ void MapManager::RegisterTemple(){
     m_doors["temple_puzzle"].push_back({3, 19, "temple_out", 9 * TILE_SIZE, 12 * TILE_SIZE });
 
     m_mapData["corridor_1"] = CORRIDOR_1;
-
-    m_doors["temple_puzzle"].push_back({0, 13, "corridor_1", 7 * TILE_SIZE, 19 * TILE_SIZE });
-    m_doors["temple_puzzle"].push_back({0, 14, "corridor_1", 7 * TILE_SIZE, 20 * TILE_SIZE });
-
+    
+    m_doors["temple_puzzle"].push_back({0, 13, "corridor_1", 12 * TILE_SIZE, 19 * TILE_SIZE });
+    m_doors["temple_puzzle"].push_back({0, 14, "corridor_1", 12 * TILE_SIZE, 20 * TILE_SIZE });
+    m_doors["corridor_1"].push_back({13, 19, "temple_out", 9 * TILE_SIZE, 13 * TILE_SIZE });
+    m_doors["corridor_1"].push_back({13, 20, "temple_out", 10 * TILE_SIZE, 13 * TILE_SIZE }); 
+  
     m_mapData["boss_room"] = BOSS_ROOM;
-    m_doors["corridor_1"].push_back({3, 0, "boss_room", 9 * TILE_SIZE, 17 * TILE_SIZE });
-    m_doors["corridor_1"].push_back({4, 0, "boss_room", 10 * TILE_SIZE, 17 * TILE_SIZE });
-    m_doors["corridor_1"].push_back({5, 0, "boss_room", 11 * TILE_SIZE, 17 * TILE_SIZE });
 
-    m_doors["boss_room"].push_back({9, 18, "corridor_1", 3 * TILE_SIZE, 1 * TILE_SIZE });
-    m_doors["boss_room"].push_back({10, 18, "corridor_1", 4 * TILE_SIZE, 1 * TILE_SIZE });
-    m_doors["boss_room"].push_back({11, 18, "corridor_1", 5 * TILE_SIZE, 1 * TILE_SIZE });
+    m_doors["corridor_1"].push_back({6, 0, "boss_room", 9 * TILE_SIZE, 17 * TILE_SIZE });
+    m_doors["corridor_1"].push_back({7, 0, "boss_room", 10 * TILE_SIZE, 17 * TILE_SIZE });
+    m_doors["corridor_1"].push_back({8, 0, "boss_room", 11 * TILE_SIZE, 17 * TILE_SIZE });
 
-    // Tillbaka ut ur temple
-    m_doors["corridor_1"].push_back({8, 19, "temple_out", 9 * TILE_SIZE, 13 * TILE_SIZE });
-    m_doors["corridor_1"].push_back({8, 20, "temple_out", 10 * TILE_SIZE, 13 * TILE_SIZE });
+    m_doors["boss_room"].push_back({9, 18, "corridor_1", 6 * TILE_SIZE, 1 * TILE_SIZE });
+    m_doors["boss_room"].push_back({10, 18, "corridor_1", 7 * TILE_SIZE, 1 * TILE_SIZE });
+    m_doors["boss_room"].push_back({11, 18, "corridor_1", 8 * TILE_SIZE, 1 * TILE_SIZE });
 }
 
 void MapManager::SwitchMap(const std::string& mapName) {
