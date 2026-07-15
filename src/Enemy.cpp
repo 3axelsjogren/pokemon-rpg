@@ -83,5 +83,5 @@ bool Enemy::CollidesWithPlayer(Vector2 playerPos) const {
 bool Enemy::IsInAttackRange(Vector2 playerPos) const {
     float dx = playerPos.x - m_pos.x;
     float dy = playerPos.y - m_pos.y;
-    return sqrtf(dx * dx + dy * dy) < TILE_SIZE * 0.9f;
+    return sqrtf(dx * dx + dy * dy) < TILE_SIZE * 1.4f;
 }
