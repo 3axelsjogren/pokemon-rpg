@@ -97,6 +97,7 @@ void Game::Update(float dt){
             m_player->SetPosition(9 * TILE_SIZE, 18 * TILE_SIZE);
             m_camera.target = m_player->GetCenter();
             m_dialog.Show("!", "Time's up! Try again.");
+            return; // gamla kartan är raderad, kör inte tile-checken nedan
         }
 
         Vector2 pos = m_player->GetPosition();
@@ -128,6 +129,9 @@ void Game::Update(float dt){
             m_camera.target = m_player->GetCenter();
         }
     }
+
+    // SwitchMap ovan kan ha raderat den gamla kartan, hämta pekaren igen
+    map = m_mapManager->GetCurrentMap();
 
     // Boss-rum
     if (m_mapManager->GetCurrentMapName() == "boss_room"){
