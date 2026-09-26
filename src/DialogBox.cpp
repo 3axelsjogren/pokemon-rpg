@@ -28,8 +28,27 @@ void DialogBox::Draw() const {
     // Namn
     DrawText(m_speaker.c_str(), 24, SCREEN_HEIGHT - 110, 18, YELLOW);
 
-    // Text
-    DrawText(m_text.c_str(), 24, SCREEN_HEIGHT - 85, 16, WHITE);
+    // Text, radbryts så långa repliker inte klipps av
+    const int fontSize = 16;
+    const int maxWidth = SCREEN_WIDTH - 48;
+    int y = SCREEN_HEIGHT - 85;
+    std::string line;
+    size_t pos = 0;
+    while (pos < m_text.size()) {
+        size_t space = m_text.find(' ', pos);
+        if (space == std::string::npos) space = m_text.size();
+        std::string word = m_text.substr(pos, space - pos);
+        std::string candidate = line.empty() ? word : line + " " + word;
+        if (!line.empty() && MeasureText(candidate.c_str(), fontSize) > maxWidth) {
+            DrawText(line.c_str(), 24, y, fontSize, WHITE);
+            y += fontSize + 4;
+            line = word;
+        } else {
+            line = candidate;
+        }
+        pos = space + 1;
+    }
+    if (!line.empty()) DrawText(line.c_str(), 24, y, fontSize, WHITE);
 
     // Hint
     DrawText("E - Stäng", SCREEN_WIDTH - 100, SCREEN_HEIGHT - 30, 14, LIGHTGRAY);

@@ -361,7 +361,8 @@ MapManager::MapManager() {
     //SwitchMap("woods2");
     //SwitchMap("temple_out");
     //SwitchMap("temple_puzzle");
-    SwitchMap("corridor_1");
+    //SwitchMap("corridor_1");
+    SwitchMap("boss_room_gem"); // bossen redan död, kristall 2 på altaret
 }
 
 void MapManager::RegisterMaps() {
@@ -500,6 +501,13 @@ void MapManager::RegisterTemple(){
     m_doors["boss_room"].push_back({9, 18, "corridor_1", 6 * TILE_SIZE, 1 * TILE_SIZE });
     m_doors["boss_room"].push_back({10, 18, "corridor_1", 7 * TILE_SIZE, 1 * TILE_SIZE });
     m_doors["boss_room"].push_back({11, 18, "corridor_1", 8 * TILE_SIZE, 1 * TILE_SIZE });
+
+    // efter bossen: kristall 2 på altaret, sedan tomt rum
+    m_mapData["boss_room_gem"] = BOSS_ROOM;
+    m_mapData["boss_room_gem"][4][10] = TILE_GEM;
+    m_mapData["boss_room_cleared"] = BOSS_ROOM;
+    m_doors["boss_room_gem"] = m_doors["boss_room"];
+    m_doors["boss_room_cleared"] = m_doors["boss_room"];
 }
 
 void MapManager::SwitchMap(const std::string& mapName) {

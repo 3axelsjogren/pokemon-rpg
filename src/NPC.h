@@ -18,6 +18,7 @@ public:
     bool IsNearPlayer(float playerX, float playerY) const;
     const std::string& GetDialog() const { return m_dialog;}
     const std::string& GetName() const { return m_name;}
+    void SetDialog(const std::string& dialog) { m_dialog = dialog; }
     float GetX() const { return m_x; }
     float GetY() const { return m_y; }
 

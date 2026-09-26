@@ -48,6 +48,13 @@ Game::Game(){
 
     m_player = std::make_unique<Player>(6 * TILE_SIZE, 8 * TILE_SIZE); // spawn
 
+    // Startar man i boss-rummet efter bossen (för testning) måste storyn matcha
+    if (m_mapManager->GetCurrentMapName() == "boss_room_gem"){
+        m_state.hasGem = true;
+        m_state.bossDefeated = true;
+        m_player->SetPosition(10 * TILE_SIZE, 16 * TILE_SIZE);
+    }
+
     m_camera = {};
     m_camera.zoom = 1.5f;
     m_camera.offset = {SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f};
@@ -118,6 +125,8 @@ void Game::Update(float dt){
     if (m_mapManager->CheckDoorTrigger(center.x, center.y, spawnX, spawnY, targetMap)){
         PlaySound(m_sfxDoor);
         if (targetMap == "blockage" && m_state.hasGem) targetMap = "blockage_unlocked";
+        if (targetMap == "boss_room" && m_state.bossDefeated)
+            targetMap = m_state.hasGem2 ? "boss_room_cleared" : "boss_room_gem";
 
         //m_state.hasGem = true; // tillfällig under utveckling --- MISSA INTE
         if (targetMap == "temple_puzzle" && !m_state.hasGem){
@@ -161,7 +170,9 @@ void Game::Update(float dt){
             if (!m_battle.IsBossAlive()){
                 m_inBossRoom = false;
                 m_state.bossDefeated = true;
-                m_state.hasGem2 = true;
+                m_battle.Reset();
+                // samma rum men med kristallen på altaret, spelaren står kvar
+                m_mapManager->SwitchMap("boss_room_gem");
                 m_dialog.Show("!", "The ancient guardian falls... A second crystal appears!");
             }
 
@@ -189,6 +200,8 @@ void Game::Update(float dt){
         newMusic = m_musicCorridor;
     else if (mapName == "boss_room")
         newMusic = m_battle.IsBossAlive() ? m_musicBoss1 : m_musicVictory;
+    else if (mapName == "boss_room_gem" || mapName == "boss_room_cleared")
+        newMusic = m_musicVictory;
     else if (mapName == "first_city" || mapName == "apartament_1" ||
              mapName == "apartament_2" || mapName == "apartament_3" ||
              mapName == "apartament_4" || mapName == "apartament_5")
@@ -214,6 +227,25 @@ void Game::Update(float dt){
         }
     }
 
+    // Plocka upp kristall 2
+    if (m_state.bossDefeated && !m_state.hasGem2){
+        int tileX = static_cast<int>(center.x / TILE_SIZE);
+        int tileY = static_cast<int>(center.y / TILE_SIZE);
+        if (m_mapManager->GetCurrentMapName() == "boss_room_gem" && tileX == 10 && tileY == 4){
+            m_state.hasGem2 = true;
+            PlaySound(m_sfxPickup);
+            m_mapManager->SwitchMap("boss_room_cleared");
+            m_dialog.Show("!", "You found a crimson crystal! The two crystals hum together... The old man in the city should see this.");
+
+            // storyn fortsätter i staden
+            m_mapManager->GetNPCs("apartament_5")[0].SetDialog(
+                "Two crystals... then the legend is true! A third one lies beyond the eastern sea. "
+                "Only with all three can the ancient gate be opened.");
+            m_mapManager->GetNPCs("apartament_4")[0].SetDialog(
+                "People say the temple guardian has fallen! Everyone in town is talking about you.");
+        }
+    }
+
     // Smooth camera
     center = m_player->GetCenter();
     m_camera.target.x += (center.x - m_camera.target.x) * 8.0f * dt;
@@ -227,10 +259,19 @@ void Game::Update(float dt){
     float halfW = (SCREEN_WIDTH / 2.0f) / m_camera.zoom;
     float halfH = (SCREEN_HEIGHT / 2.0f) / m_camera.zoom;
 
-    if (m_camera.target.x < halfW) m_camera.target.x = halfW;
-    if (m_camera.target.y < halfH) m_camera.target.y = halfH;
-    if (m_camera.target.x > mapW - halfW) m_camera.target.x = mapW - halfW;
-    if (m_camera.target.y > mapH - halfH) m_camera.target.y = mapH - halfH;
+    // Kartor mindre än skärmen (hus/lägenheter) centreras istället
+    if (mapW <= halfW * 2.0f) {
+        m_camera.target.x = mapW / 2.0f;
+    } else {
+        if (m_camera.target.x < halfW) m_camera.target.x = halfW;
+        if (m_camera.target.x > mapW - halfW) m_camera.target.x = mapW - halfW;
+    }
+    if (mapH <= halfH * 2.0f) {
+        m_camera.target.y = mapH / 2.0f;
+    } else {
+        if (m_camera.target.y < halfH) m_camera.target.y = halfH;
+        if (m_camera.target.y > mapH - halfH) m_camera.target.y = mapH - halfH;
+    }
 
     // NPC-interaktion
     if (IsKeyPressed(KEY_E)){

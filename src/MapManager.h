@@ -29,6 +29,7 @@ public:
     bool CheckDoorTrigger(float playerX, float playerY, float& outSpawnX, float& outSpawnY, std::string& outTargetMap);
 
     std::vector<NPC>& GetNPCs() { return m_npcs[m_currentMapName]; }
+    std::vector<NPC>& GetNPCs(const std::string& mapName) { return m_npcs[mapName]; }
 
 private:
     std::unique_ptr<TileMap> m_currentMap;
